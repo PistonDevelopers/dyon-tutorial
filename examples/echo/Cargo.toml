@@ -1,0 +1,8 @@
+[package]
+name = "echo"
+version = "0.1.0"
+authors = ["Sven Nilsen <bvssvni@gmail.com>"]
+
+[dependencies]
+dyon = "0.8.0"
+

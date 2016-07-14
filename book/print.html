@@ -1,0 +1,437 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+
+        <!-- MathJax -->
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = localStorage.getItem('theme');
+            if (theme == null) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = localStorage.getItem('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html"><strong>3.</strong> Comments</a></li><li><a href="./variables.html"><strong>4.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>4.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>4.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>4.3.</strong> Booleans</a></li><li><a href="./arrays.html"><strong>4.4.</strong> Arrays</a></li><li><a href="./objects.html"><strong>4.5.</strong> Objects</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <h1>Introduction</h1>
+<p>Welcome to the Dyon tutorial!</p>
+<p>Dyon is a dynamically typed scripting language,
+designed for game engines and interactive applications.
+It was started in 2016 by Sven Nilsen.</p>
+<p>This tutorial is written for people with little experience
+with programming.
+If you are experienced programmer, you might want to skip to the parts that interests you.</p>
+<h3>Dyon is different!</h3>
+<p>Dyon introduces a different way of thinking about solving problems, which some people might need some time to get used to.
+It is recommended to practice with each new idea one at a time.</p>
+<p>The language takes ideas from Javascript, Go and Rust, but focuses on practical features for games:</p>
+<ul>
+<li>Optional type system with ad-hoc types</li>
+<li>Similar object model to Javascript, but without <code>null</code></li>
+<li>Built-in support for 4D vectors, HTML hex colors</li>
+<li>Go-like coroutines</li>
+</ul>
+<p>There are plenty of new ideas in Dyon:</p>
+<ul>
+<li>Lifetime checker for arguments</li>
+<li>Use <code>return</code> as local variable</li>
+<li>Mathematical loops</li>
+<li>Current objects</li>
+<li>Secrets</li>
+<li>Grab expressions</li>
+<li>Dynamic modules as a way of organizing code</li>
+</ul>
+<h3>How this tutorial is organized</h3>
+<p>Each chapter tells how to do something step by step.</p>
+<p>At the bottom there is a &quot;Comments&quot; section.
+This contains things you might have noticed and things you can try out on your own.</p>
+<h3>Source code</h3>
+<p>You will find the source code for all examples under &quot;examples&quot; in the git repository.</p>
+<h1>Getting started</h1>
+<p>Dyon is written in the Rust programming language.
+You do not need to know Rust to use Dyon.
+These two languages are like yin and yang.
+They are very different in some ways, but complement each other.</p>
+<p>Before you can run Dyon programs, you need to do the following:</p>
+<ol>
+<li>Install <a href="https://www.rust-lang.org/en-US/">Rust</a>.</li>
+<li>Open up the Terminal window</li>
+<li>Type <code>cargo new --bin hello_world</code></li>
+</ol>
+<p>Open up Cargo.toml and add the following:</p>
+<pre><code>[dependencies]
+dyon = 0.8.0
+</code></pre>
+<p>To start a Dyon program we need to write a little Rust.</p>
+<p>Open up &quot;src/main.rs&quot; and type:</p>
+<pre><code class="language-rust">extern crate dyon;
+
+use dyon::{error, run};
+
+fn main() {
+    error(run(&quot;src/main.dyon&quot;));
+}
+</code></pre>
+<p>Create a new file &quot;src/main.dyon&quot; and write:</p>
+<pre><code class="language-dyon">fn main() {
+    println(&quot;Hello world!&quot;)
+}
+</code></pre>
+<p>In the terminal window, go to the &quot;hello_world&quot; folder and type:</p>
+<pre><code>$ cargo run
+</code></pre>
+<p>This should print out:</p>
+<pre><code>Hello world!
+</code></pre>
+<h3>Comments</h3>
+<p>A few things you might have noticed:</p>
+<ul>
+<li>Dyon has no &quot;;&quot; at the end of lines</li>
+<li>The &quot;fn&quot; keyword is used by both Rust and Dyon</li>
+<li>The &quot;main&quot; function is called when running the program</li>
+<li>Double quotes &quot;&quot; are used for text</li>
+</ul>
+<p>Some things you can try:</p>
+<ol>
+<li>Put your name inside the text!</li>
+<li>Add a new line where you print out something else!</li>
+<li>Change &quot;println&quot; to &quot;print&quot; and see what happens!</li>
+</ol>
+<h1>Comments</h1>
+<p>A comment is text to explain how some code works.
+Comments are ignored when running the program.</p>
+<p>Dyon uses <code>//</code> for single-line and <code>/* */</code> for multi-line comments.</p>
+<pre><code class="language-dyon">/*
+
+  this program was made by
+==== SUPER INTELLIGENCE ====
+from another space dimension
+
+*/
+
+fn main() {
+    // Can I ask you something?
+    println(&quot;hello?&quot;)
+}
+</code></pre>
+<p>A single-line comment ignores the rest of the line:</p>
+<pre><code class="language-dyon">println(&quot;hello&quot;) // Prints `hello`.
+</code></pre>
+<p>A multi-line comment starts with <code>/*</code> and ends with <code>*/</code>.</p>
+<pre><code class="language-dyon">println(/* testing, testing! */ &quot;hello&quot;)
+</code></pre>
+<p>You can nest <code>/* */</code>:</p>
+<pre><code class="language-dyon">/*
+    /*
+    A comment inside a comment!
+    */
+*/
+</code></pre>
+<h3>Tips and tricks</h3>
+<p>It is more common to use <code>//</code> than <code>/* */</code> for documenting the code.</p>
+<p>End a comment with a dot to make it easier to read:</p>
+<pre><code class="language-dyon">// Alice opened the door
+// by pressing a button.
+</code></pre>
+<p>You can use <code>/* */</code> to ignore some code without removing it.
+This is useful when you try out different programs:</p>
+<pre><code class="language-dyon">/*
+fn main() {
+    println(&quot;one&quot;)
+}
+*/
+
+fn main() {
+    println(&quot;two&quot;)
+}
+</code></pre>
+<p>Organize the code in paragraphs, just like in a book.
+Write a single-line comment for each paragraph.
+Separate paragraphs with an empty line:</p>
+<pre><code class="language-dyon">fn main() {
+    // Print the numbers from 1 to 10.
+    list := sift i 10 { i + 1 }
+    println(list)
+
+    // Print the numbers from 11 to 20.
+    list := sift i [10, 20) { i + 1 }
+    println(list)
+}
+</code></pre>
+<h1>Variables</h1>
+<p>The name &quot;variable&quot; means something that can change.
+Variables store data inside a program.</p>
+<p>Create a new project &quot;echo&quot;, or edit the &quot;hello_world&quot; project.</p>
+<p>In &quot;src/main.dyon&quot;, type the following:</p>
+<pre><code class="language-dyon">fn main() {
+    print(&quot;Type something: &quot;)
+    line := read_line()
+    sleep(1)
+    println(line)
+}
+</code></pre>
+<p>The operator <code>:=</code> is used to create a variable.</p>
+<p>A variable has a name, a type and a value.
+The name is &quot;line&quot;, and the value is the result of <code>read_line()</code>.</p>
+<p>The code <code>read_line()</code> returns only variables of type <code>str</code>.
+This becomes the type of the variable with name &quot;line&quot;.</p>
+<h3>Changing value of variables</h3>
+<p>The value of a variable can be changed with the <code>=</code> operator:</p>
+<pre><code class="language-dyon">a := 3
+a = 4
+</code></pre>
+<p>The new value must be of same type as the variable.</p>
+<pre><code class="language-dyon">a := 3
+a = &quot;hi!&quot; // ERROR
+</code></pre>
+<h3>Comments</h3>
+<p>A few things you might have noticed:</p>
+<ul>
+<li>Dyon runs the program from top to bottom</li>
+<li>When it has finished one line, it goes to the next one</li>
+<li>The program stops when the last line in &quot;main&quot; is finished</li>
+<li>To use a variable, you must type the exact name</li>
+</ul>
+<p>Some things you can try:</p>
+<ol>
+<li>Print out &quot;You said: (line)&quot;!</li>
+<li>Change <code>sleep(1)</code> to wait 5 seconds!</li>
+<li>Change the name of &quot;line&quot; to something else!</li>
+<li>Put &quot;println(line)&quot; first and see what happens!</li>
+</ol>
+<h1>Numbers</h1>
+<p>A number in Dyon is a variable that stores floats with 64 bit precision.
+The type is <code>f64</code>.</p>
+<pre><code class="language-dyon">a := 1
+b := .5
+c := 2.5
+d := -3
+e := 1_000_000
+f := 1e6
+g := -7_034.52e-22
+</code></pre>
+<p>You can add, subtract, multiply, divide, take the power and find the division reminder:</p>
+<pre><code class="language-dyon">a := 2
+b := a + 3
+c := a - 3
+d := a * 3
+e := a^3
+f := a / 3
+g := a % 3
+</code></pre>
+<h3>Relative change</h3>
+<p>The following operators change the value:</p>
+<pre><code class="language-dyon">a = a + 1
+a += 1
+
+a = a - 1
+a -= 1
+
+a = a * 2
+a *= 2
+
+a = a / 2
+a /= 2
+
+a = a % 2
+a %= 2
+</code></pre>
+<h3>Comments</h3>
+<p>Some thing you might have noticed:</p>
+<ul>
+<li><code>f64</code> is used by both Rust and Dyon</li>
+<li>&quot;One million&quot; can be written as <code>1_000_000</code> or <code>1e6</code></li>
+</ul>
+<h1>Strings</h1>
+<p>A string in Dyon is a variable that stores UTF-8 bytes.
+This represent text.
+The type is <code>str</code>.</p>
+<p>Use double quotes to write a string:</p>
+<pre><code class="language-dyon">a := &quot;hi!&quot;
+</code></pre>
+<p>The <code>\</code> symbol escapes special characters:</p>
+<ul>
+<li><code>\n</code> - New line</li>
+<li><code>\t</code> - Tab</li>
+<li><code>\&quot;</code> - The <code>&quot;</code> character</li>
+<li><code>\\</code> - The <code>\</code> character</li>
+<li><code>\r</code> - Moves to beginning of line without creating a new line</li>
+<li><code>\u005c</code> - Unicode character by 4 hexadecimal code</li>
+</ul>
+<p>The <code>+</code> operator joins two strings together:</p>
+<pre><code class="language-dyon">name := &quot;Santa&quot;
+title := &quot;hi &quot; + name
+</code></pre>
+<p>The <code>str</code> function converts a value into a string:</p>
+<pre><code class="language-dyon">age := 58
+println(&quot;Bilbo is &quot; + str(age) + &quot; years old!&quot;)
+</code></pre>
+<h1>Booleans</h1>
+<p>A boolean in Dyon is a variable that stores <code>true</code> or <code>false</code>.
+This represents a choice with two options.
+The type is <code>bool</code>.</p>
+<h3>Lazy and eager</h3>
+<p>A lazy operator does not compute the right argument if the left argument gives the result.</p>
+<p>An eager operator computes both arguments.</p>
+<h3>Logical gates</h3>
+<p>A logical gate is an operation on two boolean values.</p>
+<table><thead><tr><td>A      </td><td>B      </td><td>A AND B</td><td>A OR B</td><td>A XOR B</td><td>A EXC B</td></tr></thead>
+<tr><td>false  </td><td>false  </td><td>false  </td><td>false </td><td>false  </td><td>false</td></tr>
+<tr><td>false  </td><td>true   </td><td>false  </td><td>true  </td><td>true   </td><td>false</td></tr>
+<tr><td>true   </td><td>false  </td><td>false  </td><td>true  </td><td>true   </td><td>true</td></tr>
+<tr><td>true   </td><td>true   </td><td>true   </td><td>true  </td><td>false  </td><td>false</td></tr>
+</table>
+<p>There are 4 operators for AND:</p>
+<pre><code class="language-dyon">a &amp;&amp; b // lazy
+a and b // eager
+a ∧ b // eager
+a * b // eager
+</code></pre>
+<p>There are 4 operators for OR:</p>
+<pre><code class="language-dyon">a || b // lazy
+a or b // eager
+a ∨ b // eager
+a + b // eager
+</code></pre>
+<p>There is 1 operator for XOR:</p>
+<pre><code class="language-dyon">a ^ b
+</code></pre>
+<p>There is 1 operator for EXC:</p>
+<pre><code class="language-dyon">a - b
+</code></pre>
+<p>There are 2 operators for NOT:</p>
+<pre><code class="language-dyon">!a
+¬a
+</code></pre>
+<h3>Why more than one way</h3>
+<p>Boolean algebra is used with different notations:</p>
+<ul>
+<li>Programming applications</li>
+<li>Logic</li>
+<li>Non-invertible sets</li>
+</ul>
+<p>When programming applications, you use <code>&amp;&amp;</code>, <code>||</code> and <code>!</code>.</p>
+<p>Logic use <code>∧</code>, <code>∨</code> and <code>¬</code>.</p>
+<p>Non-invertible sets use <code>*</code>, <code>+</code> and <code>-</code>.</p>
+<p>In the future Dyon might get more features for Boolean algebra.</p>
+<h1>Arrays</h1>
+<p>An array stores a list of values. The type is <code>[]</code>.</p>
+<pre><code class="language-dyon">a := [1, 2, 3]
+</code></pre>
+<p>You can store values of different types in the same array:</p>
+<pre><code class="language-dyon">a := [1, &quot;hi&quot;, [1, 2, 3]]
+</code></pre>
+<p>To access an value inside an array, you use a number that start at <code>0</code>:</p>
+<pre><code class="language-dyon">a := [1, 2, 3]
+println(a[0]) // prints `1`
+println(a[1]) // prints `2`
+println(a[2]) // prints `3`
+</code></pre>
+<h3>Multi-dimensional arrays</h3>
+<p>An array can contain arrays.
+This makes it possible to represent grids in 2D, 3D etc.</p>
+<pre><code class="language-dyon">a := [1, 2, 3] // 1D
+println(a[0]) // prints `1`
+
+b :=  [ // 2D
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9],
+      ]
+println(b[0][0]) // prints `1`
+
+c :=  [ // 3D
+          [[1, 2], [3, 4]],
+          [[5, 6], [7, 8]],
+      ]
+println(a[0][0][0]) // prints `1`
+</code></pre>
+<h1>Objects</h1>
+<p>An object stores a list of values, organized as a dictionary. The type is <code>{}</code>.</p>
+<pre><code class="language-dyon">a := {x: 1, y: &quot;hi&quot;}
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+
+                
+
+            </div>
+
+            
+
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

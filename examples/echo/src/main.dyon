@@ -1,0 +1,6 @@
+fn main() {
+    print("Type something: ")
+    line := read_line()
+    sleep(1)
+    println(line)
+}
