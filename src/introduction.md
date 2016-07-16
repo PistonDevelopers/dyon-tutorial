@@ -42,4 +42,4 @@ This contains things you might have noticed and things you can try out on your o
 
 ### Source code
 
-You will find the source code for all examples under "examples" in the git repository.
+You will find the source code for all examples under "examples" in the [git repository](https://github.com/pistondevelopers/dyon-tutorial).

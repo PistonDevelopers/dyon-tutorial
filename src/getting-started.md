@@ -27,7 +27,7 @@ fn main() {
 
 ### Hello World example
 
-Source code: examples/hello_world
+Source code: [examples/hello_world](https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/hello_world)
 
 Put this in "src/main.dyon":
 

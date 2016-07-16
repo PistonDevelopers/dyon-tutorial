@@ -6,7 +6,7 @@ other modules.
 
 ### Dynmod example
 
-Source: examples/dynmod
+Source: [examples/dynmod](https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/dynmod)
 
 main.dyon:
 ```rust
