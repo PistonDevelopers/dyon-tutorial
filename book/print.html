@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>The Dyon Programming Language</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,7 +59,7 @@
                         <i id="theme-toggle" class="fa fa-paint-brush"></i>
                     </div>
 
-                    <h1 class="menu-title"></h1>
+                    <h1 class="menu-title">The Dyon Programming Language</h1>
 
                     <div class="right-buttons">
                         <i id="print-button" class="fa fa-print" title="Print this book"></i>
@@ -101,7 +101,7 @@ The language is designed to work around this limitation.</p>
 <p>At the bottom there is a &quot;Comments&quot; section.
 This contains things you might have noticed and things you can try out on your own.</p>
 <h3>Source code</h3>
-<p>You will find the source code for all examples under &quot;examples&quot; in the git repository.</p>
+<p>You will find the source code for all examples under &quot;examples&quot; in the <a href="https://github.com/pistondevelopers/dyon-tutorial">git repository</a>.</p>
 <h1>Getting started</h1>
 <p>Before you can run Dyon programs, you need to do the following:</p>
 <ol>
@@ -123,7 +123,7 @@ fn main() {
 }
 </code></pre>
 <h3>Hello World example</h3>
-<p>Source code: examples/hello_world</p>
+<p>Source code: <a href="https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/hello_world">examples/hello_world</a></p>
 <p>Put this in &quot;src/main.dyon&quot;:</p>
 <pre><code class="language-rust">fn main() {
     println(&quot;Hello world!&quot;)
@@ -231,7 +231,7 @@ Separate paragraphs with an empty line.</p>
 c() = 299_792_458
 </code></pre>
 <h3>Fibonacci example</h3>
-<p>Source code: examples/fibonacci</p>
+<p>Source code: <a href="https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/fibonacci">examples/fibonacci</a></p>
 <pre><code class="language-rust">fib(x) = if x &lt;= 0 { 0 }
          else if x == 1 { 1 }
          else { fib(x-1) + fib(x-2) }
@@ -390,7 +390,7 @@ Expected assigning to text
 3,5:     ^
 </code></pre>
 <h3>Echo example</h3>
-<p>Source code: examples/echo</p>
+<p>Source code: <a href="https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/echo">examples/echo</a></p>
 <p>Create a new project and name it &quot;echo&quot;.</p>
 <p>Put this in &quot;src/main.dyon&quot;:</p>
 <pre><code class="language-rust">fn main() {
@@ -1453,7 +1453,7 @@ It is not designed for building abstractions, or proving things through the type
 It is common to write a loader script that loads modules and imports them to
 other modules.</p>
 <h3>Dynmod example</h3>
-<p>Source: examples/dynmod</p>
+<p>Source: <a href="https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/dynmod">examples/dynmod</a></p>
 <p>main.dyon:</p>
 <pre><code class="language-rust">fn main() {
     math := unwrap(load(&quot;src/math.dyon&quot;))

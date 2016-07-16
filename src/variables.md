@@ -28,7 +28,7 @@ Expected assigning to text
 
 ### Echo example
 
-Source code: examples/echo
+Source code: [examples/echo](https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/echo)
 
 Create a new project and name it "echo".
 

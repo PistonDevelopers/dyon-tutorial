@@ -35,7 +35,7 @@ c() = 299_792_458
 
 ### Fibonacci example
 
-Source code: examples/fibonacci
+Source code: [examples/fibonacci](https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/fibonacci)
 
 ```rust
 fib(x) = if x <= 0 { 0 }
