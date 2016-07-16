@@ -1,24 +1,17 @@
 # Getting started
 
-Dyon is written in the Rust programming language.
-You do not need to know Rust to use Dyon.
-These two languages are like yin and yang.
-They are very different in some ways, but complement each other.
-
 Before you can run Dyon programs, you need to do the following:
 
 1. Install [Rust](https://www.rust-lang.org/en-US/).
 2. Open up the Terminal window
-3. Type `cargo new --bin hello_world`
+3. Type `cargo new --bin <project name>`
 
-Open up Cargo.toml and add the following:
+Open up "Cargo.toml" and add the following:
 
 ```
 [dependencies]
 dyon = 0.8.0
 ```
-
-To start a Dyon program we need to write a little Rust.
 
 Open up "src/main.rs" and type:
 
@@ -32,9 +25,13 @@ fn main() {
 }
 ```
 
-Create a new file "src/main.dyon" and write:
+### Hello World example
 
-```dyon
+Source code: examples/hello_world
+
+Put this in "src/main.dyon":
+
+```rust
 fn main() {
     println("Hello world!")
 }
@@ -54,7 +51,7 @@ Hello world!
 
 ### Comments
 
-A few things you might have noticed:
+You might have noticed:
 
 - Dyon has no ";" at the end of lines
 - The "fn" keyword is used by both Rust and Dyon

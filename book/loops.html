@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+
+        <!-- MathJax -->
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = localStorage.getItem('theme');
+            if (theme == null) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = localStorage.getItem('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html"><strong>3.</strong> Comments</a></li><li><a href="./functions.html"><strong>4.</strong> Functions</a></li><li><ul class="section"><li><a href="./mutability.html"><strong>4.1.</strong> Mutability</a></li><li><a href="./named-arguments.html"><strong>4.2.</strong> Named arguments</a></li></ul></li><li><a href="./variables.html"><strong>5.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>5.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>5.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>5.3.</strong> Booleans</a></li><li><a href="./4d-vectors.html"><strong>5.4.</strong> 4D vectors</a></li><li><a href="./arrays.html"><strong>5.5.</strong> Arrays</a></li><li><a href="./objects.html"><strong>5.6.</strong> Objects</a></li><li><a href="./links.html"><strong>5.7.</strong> Links</a></li><li><a href="./closures.html"><strong>5.8.</strong> Closures</a></li><li><a href="./options.html"><strong>5.9.</strong> Options</a></li><li><a href="./results.html"><strong>5.10.</strong> Results</a></li><li><a href="./threads.html"><strong>5.11.</strong> Threads</a></li></ul></li><li><a href="./if.html"><strong>6.</strong> If</a></li><li><a href="./loops.html" class="active"><strong>7.</strong> Loops</a></li><li><ul class="section"><li><a href="./break.html"><strong>7.1.</strong> Break</a></li><li><a href="./continue.html"><strong>7.2.</strong> Continue</a></li><li><a href="./infer-range.html"><strong>7.3.</strong> Infer range</a></li><li><a href="./packed-loops.html"><strong>7.4.</strong> Packed loops</a></li></ul></li><li><a href="./secrets.html"><strong>8.</strong> Secrets</a></li><li><a href="./current-objects.html"><strong>9.</strong> Current objects</a></li><li><a href="./types.html"><strong>10.</strong> Types</a></li><li><ul class="section"><li><a href="./ad-hoc-types.html"><strong>10.1.</strong> Ad-hoc types</a></li></ul></li><li><a href="./lifetimes.html"><strong>11.</strong> Lifetimes</a></li><li><a href="./error-handling.html"><strong>12.</strong> Error handling</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <h1>Loops</h1>
+<p>In Dyon there are 3 kinds of loops:</p>
+<ul>
+<li>Infinite loop</li>
+<li>Traditional For loop</li>
+<li>Mathematical loops</li>
+</ul>
+<h3>Infinite loop</h3>
+<pre><code class="language-rust">loop {
+    println(&quot;hi!&quot;)
+    sleep(1)
+}
+</code></pre>
+<p>An infinite loop runs runs forever, or until <code>break</code> is used inside it.</p>
+<p>Tip: Use Ctrl+C to terminate an infinite loop in the Terminal window.</p>
+<h3>Traditional For loop</h3>
+<pre><code class="language-rust">for i := 0; i &lt; 10; i += 1 {
+    println(i)
+}
+</code></pre>
+<p>A traditional loop is similar to the loop in the programming language C.
+It takes 3 expressions:</p>
+<ul>
+<li>Initialize, called first and once, e.g. <code>i := 0</code></li>
+<li>Condition, checked for each turn, e.g. <code>i &lt; 10</code></li>
+<li>Step, called after each turn, e.g. <code>i += 1</code></li>
+</ul>
+<h3>Mathematical loops</h3>
+<p>Dyon is famous for its mathematical loops:</p>
+<ul>
+<li><code>for</code> - do something for each turn</li>
+<li><code>sift</code> - create an array out of values</li>
+<li><code>min</code> - find the minimum value</li>
+<li><code>max</code> - find the maximum value</li>
+<li><code>∃</code>/<code>any</code> - check whether a condition is true for any value</li>
+<li><code>∀</code>/<code>all</code> - check whether a condition is true for all values</li>
+<li><code>∑</code>/<code>sum</code> - add values to get the sum</li>
+<li><code>∏</code>/<code>prod</code> - multiply values to get the product</li>
+</ul>
+<p>In mathematics, it is very common to loop over an index.
+An index starts at 0, and increases with 1 for each turn.
+All mathematical loops uses the same index notation.</p>
+<pre><code class="language-rust">for i 10 {
+    println(i)
+}
+</code></pre>
+<p>This is equivalent to <code>for i := 0; i &lt; 10; i += 1</code>.</p>
+<p>You can also specify the start and end value:</p>
+<pre><code class="language-rust">for i [0, 10) {
+    println(i)
+}
+</code></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a href="./if.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="./break.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./if.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./break.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

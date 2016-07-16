@@ -1,13 +1,31 @@
 # Variables
 
-The name "variable" means something that can change.
-Variables store data inside a program.
+```rust
+a := 3 // Create a variable "a" with value `3`.
+a = 4 // Change the value of variable "a" to `4`.
+```
 
-Create a new project "echo", or edit the "hello_world" project.
+A variable has a name, a type and a value.
 
-In "src/main.dyon", type the following:
+- The operator `:=` creates a variable.
+- The operator `=` changes the value of a variable.
 
-```dyon
+When changing the value of a variable, the type must be the same:
+
+```rust
+a := 3
+a = "hi!" // ERROR
+```
+
+### Echo example
+
+Source code: examples/echo
+
+Create a new project and name it "echo".
+
+Put this in "src/main.dyon":
+
+```rust
 fn main() {
     print("Type something: ")
     line := read_line()
@@ -16,38 +34,14 @@ fn main() {
 }
 ```
 
-The operator `:=` is used to create a variable.
-
-A variable has a name, a type and a value.
-The name is "line", and the value is the result of `read_line()`.
-
-The code `read_line()` returns only variables of type `str`.
-This becomes the type of the variable with name "line".
-
-### Changing value of variables
-
-The value of a variable can be changed with the `=` operator:
-
-```dyon
-a := 3
-a = 4
-```
-
-The new value must be of same type as the variable.
-
-```dyon
-a := 3
-a = "hi!" // ERROR
-```
+This program prints out the text you gave it after 1 second.
+The text is stored inside a variable "line".
 
 ### Comments
 
-A few things you might have noticed:
+You might have noticed:
 
-- Dyon runs the program from top to bottom
-- When it has finished one line, it goes to the next one
-- The program stops when the last line in "main" is finished
-- To use a variable, you must type the exact name
+- `println` ends with a new line, while `print` stays at same line
 
 Some things you can try:
 

@@ -6,7 +6,7 @@ The type is `str`.
 
 Use double quotes to write a string:
 
-```dyon
+```rust
 a := "hi!"
 ```
 
@@ -21,14 +21,14 @@ The `\` symbol escapes special characters:
 
 The `+` operator joins two strings together:
 
-```dyon
+```rust
 name := "Santa"
 title := "hi " + name
 ```
 
 The `str` function converts a value into a string:
 
-```dyon
+```rust
 age := 58
 println("Bilbo is " + str(age) + " years old!")
 ```

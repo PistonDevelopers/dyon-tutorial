@@ -47,7 +47,7 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html" class="active"><strong>3.</strong> Comments</a></li><li><a href="./variables.html"><strong>4.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>4.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>4.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>4.3.</strong> Booleans</a></li><li><a href="./arrays.html"><strong>4.4.</strong> Arrays</a></li><li><a href="./objects.html"><strong>4.5.</strong> Objects</a></li></ul>
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html" class="active"><strong>3.</strong> Comments</a></li><li><a href="./functions.html"><strong>4.</strong> Functions</a></li><li><ul class="section"><li><a href="./mutability.html"><strong>4.1.</strong> Mutability</a></li><li><a href="./named-arguments.html"><strong>4.2.</strong> Named arguments</a></li></ul></li><li><a href="./variables.html"><strong>5.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>5.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>5.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>5.3.</strong> Booleans</a></li><li><a href="./4d-vectors.html"><strong>5.4.</strong> 4D vectors</a></li><li><a href="./arrays.html"><strong>5.5.</strong> Arrays</a></li><li><a href="./objects.html"><strong>5.6.</strong> Objects</a></li><li><a href="./links.html"><strong>5.7.</strong> Links</a></li><li><a href="./closures.html"><strong>5.8.</strong> Closures</a></li><li><a href="./options.html"><strong>5.9.</strong> Options</a></li><li><a href="./results.html"><strong>5.10.</strong> Results</a></li><li><a href="./threads.html"><strong>5.11.</strong> Threads</a></li></ul></li><li><a href="./if.html"><strong>6.</strong> If</a></li><li><a href="./loops.html"><strong>7.</strong> Loops</a></li><li><ul class="section"><li><a href="./break.html"><strong>7.1.</strong> Break</a></li><li><a href="./continue.html"><strong>7.2.</strong> Continue</a></li><li><a href="./infer-range.html"><strong>7.3.</strong> Infer range</a></li><li><a href="./packed-loops.html"><strong>7.4.</strong> Packed loops</a></li></ul></li><li><a href="./secrets.html"><strong>8.</strong> Secrets</a></li><li><a href="./current-objects.html"><strong>9.</strong> Current objects</a></li><li><a href="./types.html"><strong>10.</strong> Types</a></li><li><ul class="section"><li><a href="./ad-hoc-types.html"><strong>10.1.</strong> Ad-hoc types</a></li></ul></li><li><a href="./lifetimes.html"><strong>11.</strong> Lifetimes</a></li><li><a href="./error-handling.html"><strong>12.</strong> Error handling</a></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -71,11 +71,10 @@
 <p>A comment is text to explain how some code works.
 Comments are ignored when running the program.</p>
 <p>Dyon uses <code>//</code> for single-line and <code>/* */</code> for multi-line comments.</p>
-<pre><code class="language-dyon">/*
+<pre><code class="language-rust">/*
 
-  this program was made by
-==== SUPER INTELLIGENCE ====
-from another space dimension
+This text is inside a multi-line comment.
+It is ignored when running the program.
 
 */
 
@@ -85,13 +84,14 @@ fn main() {
 }
 </code></pre>
 <p>A single-line comment ignores the rest of the line:</p>
-<pre><code class="language-dyon">println(&quot;hello&quot;) // Prints `hello`.
+<pre><code class="language-rust">println(&quot;hello&quot;) // Prints `hello`.
 </code></pre>
 <p>A multi-line comment starts with <code>/*</code> and ends with <code>*/</code>.</p>
-<pre><code class="language-dyon">println(/* testing, testing! */ &quot;hello&quot;)
+<pre><code class="language-rust">/* testing, testing! */
+println(&quot;hello&quot;)
 </code></pre>
 <p>You can nest <code>/* */</code>:</p>
-<pre><code class="language-dyon">/*
+<pre><code class="language-rust">/*
     /*
     A comment inside a comment!
     */
@@ -99,13 +99,12 @@ fn main() {
 </code></pre>
 <h3>Tips and tricks</h3>
 <p>It is more common to use <code>//</code> than <code>/* */</code> for documenting the code.</p>
-<p>End a comment with a dot to make it easier to read:</p>
-<pre><code class="language-dyon">// Alice opened the door
+<p>End a comment with a dot to make it easier to see where the line is ending:</p>
+<pre><code class="language-rust">// Alice opened the door
 // by pressing a button.
 </code></pre>
-<p>You can use <code>/* */</code> to ignore some code without removing it.
-This is useful when you try out different programs:</p>
-<pre><code class="language-dyon">/*
+<p>You can use <code>/* */</code> to ignore some code without removing it:</p>
+<pre><code class="language-rust">/*
 fn main() {
     println(&quot;one&quot;)
 }
@@ -115,10 +114,11 @@ fn main() {
     println(&quot;two&quot;)
 }
 </code></pre>
-<p>Organize the code in paragraphs, just like in a book.
+<p>One technique that helps making code more understandable:
+Organize the code in paragraphs, like in a book.
 Write a single-line comment for each paragraph.
-Separate paragraphs with an empty line:</p>
-<pre><code class="language-dyon">fn main() {
+Separate paragraphs with an empty line.</p>
+<pre><code class="language-rust">fn main() {
     // Print the numbers from 1 to 10.
     list := sift i 10 { i + 1 }
     println(list)
@@ -139,7 +139,7 @@ Separate paragraphs with an empty line:</p>
                 
 
                 
-                    <a href="./variables.html" class="mobile-nav-chapters next">
+                    <a href="./functions.html" class="mobile-nav-chapters next">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -153,7 +153,7 @@ Separate paragraphs with an empty line:</p>
             
 
             
-                <a href="./variables.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                <a href="./functions.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
                     <i class="fa fa-angle-right"></i>
                 </a>
             

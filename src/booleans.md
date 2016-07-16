@@ -23,7 +23,7 @@ true   |true   |true   |true  |false  |false
 
 There are 4 operators for AND:
 
-```dyon
+```rust
 a && b // lazy
 a and b // eager
 a ∧ b // eager
@@ -32,7 +32,7 @@ a * b // eager
 
 There are 4 operators for OR:
 
-```dyon
+```rust
 a || b // lazy
 a or b // eager
 a ∨ b // eager
@@ -41,19 +41,19 @@ a + b // eager
 
 There is 1 operator for XOR:
 
-```dyon
+```rust
 a ^ b
 ```
 
 There is 1 operator for EXC:
 
-```dyon
+```rust
 a - b
 ```
 
 There are 2 operators for NOT:
 
-```dyon
+```rust
 !a
 ¬a
 ```

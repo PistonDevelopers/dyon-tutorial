@@ -5,12 +5,11 @@ Comments are ignored when running the program.
 
 Dyon uses `//` for single-line and `/* */` for multi-line comments.
 
-```dyon
+```rust
 /*
 
-  this program was made by
-==== SUPER INTELLIGENCE ====
-from another space dimension
+This text is inside a multi-line comment.
+It is ignored when running the program.
 
 */
 
@@ -22,19 +21,20 @@ fn main() {
 
 A single-line comment ignores the rest of the line:
 
-```dyon
+```rust
 println("hello") // Prints `hello`.
 ```
 
 A multi-line comment starts with `/*` and ends with `*/`.
 
-```dyon
-println(/* testing, testing! */ "hello")
+```rust
+/* testing, testing! */
+println("hello")
 ```
 
 You can nest `/* */`:
 
-```dyon
+```rust
 /*
     /*
     A comment inside a comment!
@@ -46,17 +46,16 @@ You can nest `/* */`:
 
 It is more common to use `//` than `/* */` for documenting the code.
 
-End a comment with a dot to make it easier to read:
+End a comment with a dot to make it easier to see where the line is ending:
 
-```dyon
+```rust
 // Alice opened the door
 // by pressing a button.
 ```
 
-You can use `/* */` to ignore some code without removing it.
-This is useful when you try out different programs:
+You can use `/* */` to ignore some code without removing it:
 
-```dyon
+```rust
 /*
 fn main() {
     println("one")
@@ -68,11 +67,12 @@ fn main() {
 }
 ```
 
-Organize the code in paragraphs, just like in a book.
+One technique that helps making code more understandable:
+Organize the code in paragraphs, like in a book.
 Write a single-line comment for each paragraph.
-Separate paragraphs with an empty line:
+Separate paragraphs with an empty line.
 
-```dyon
+```rust
 fn main() {
     // Print the numbers from 1 to 10.
     list := sift i 10 { i + 1 }

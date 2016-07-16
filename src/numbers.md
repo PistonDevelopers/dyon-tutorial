@@ -3,7 +3,7 @@
 A number in Dyon is a variable that stores floats with 64 bit precision.
 The type is `f64`.
 
-```dyon
+```rust
 a := 1
 b := .5
 c := 2.5
@@ -15,7 +15,7 @@ g := -7_034.52e-22
 
 You can add, subtract, multiply, divide, take the power and find the division reminder:
 
-```dyon
+```rust
 a := 2
 b := a + 3
 c := a - 3
@@ -29,7 +29,7 @@ g := a % 3
 
 The following operators change the value:
 
-```dyon
+```rust
 a = a + 1
 a += 1
 

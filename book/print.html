@@ -47,7 +47,7 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html"><strong>3.</strong> Comments</a></li><li><a href="./variables.html"><strong>4.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>4.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>4.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>4.3.</strong> Booleans</a></li><li><a href="./arrays.html"><strong>4.4.</strong> Arrays</a></li><li><a href="./objects.html"><strong>4.5.</strong> Objects</a></li></ul>
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html"><strong>3.</strong> Comments</a></li><li><a href="./functions.html"><strong>4.</strong> Functions</a></li><li><ul class="section"><li><a href="./mutability.html"><strong>4.1.</strong> Mutability</a></li><li><a href="./named-arguments.html"><strong>4.2.</strong> Named arguments</a></li></ul></li><li><a href="./variables.html"><strong>5.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>5.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>5.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>5.3.</strong> Booleans</a></li><li><a href="./4d-vectors.html"><strong>5.4.</strong> 4D vectors</a></li><li><a href="./arrays.html"><strong>5.5.</strong> Arrays</a></li><li><a href="./objects.html"><strong>5.6.</strong> Objects</a></li><li><a href="./links.html"><strong>5.7.</strong> Links</a></li><li><a href="./closures.html"><strong>5.8.</strong> Closures</a></li><li><a href="./options.html"><strong>5.9.</strong> Options</a></li><li><a href="./results.html"><strong>5.10.</strong> Results</a></li><li><a href="./threads.html"><strong>5.11.</strong> Threads</a></li></ul></li><li><a href="./if.html"><strong>6.</strong> If</a></li><li><a href="./loops.html"><strong>7.</strong> Loops</a></li><li><ul class="section"><li><a href="./break.html"><strong>7.1.</strong> Break</a></li><li><a href="./continue.html"><strong>7.2.</strong> Continue</a></li><li><a href="./infer-range.html"><strong>7.3.</strong> Infer range</a></li><li><a href="./packed-loops.html"><strong>7.4.</strong> Packed loops</a></li></ul></li><li><a href="./secrets.html"><strong>8.</strong> Secrets</a></li><li><a href="./current-objects.html"><strong>9.</strong> Current objects</a></li><li><a href="./types.html"><strong>10.</strong> Types</a></li><li><ul class="section"><li><a href="./ad-hoc-types.html"><strong>10.1.</strong> Ad-hoc types</a></li></ul></li><li><a href="./lifetimes.html"><strong>11.</strong> Lifetimes</a></li><li><a href="./error-handling.html"><strong>12.</strong> Error handling</a></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -68,17 +68,19 @@
 
                 <div id="content" class="content">
                     <h1>Introduction</h1>
-<p>Welcome to the Dyon tutorial!</p>
+<p>Welcome to the Dyon 0.8 tutorial!</p>
 <p>Dyon is a dynamically typed scripting language,
 designed for game engines and interactive applications.
 It was started in 2016 by Sven Nilsen.</p>
-<p>This tutorial is written for people with little experience
-with programming.
+<p>This tutorial is written for people with little programming experience.
+The language is made simple on purpose.
 If you are experienced programmer, you might want to skip to the parts that interests you.</p>
 <h3>Dyon is different!</h3>
-<p>Dyon introduces a different way of thinking about solving problems, which some people might need some time to get used to.
-It is recommended to practice with each new idea one at a time.</p>
-<p>The language takes ideas from Javascript, Go and Rust, but focuses on practical features for games:</p>
+<p>If you have used another programming language before,
+there are some things worth to keep in mind:</p>
+<p>Dyon has a limited memory model because of the lack of a garbage collector.
+The language is designed to work around this limitation.</p>
+<p>The language takes ideas from Javascript, Go and Rust, but focuses on practical features for making games:</p>
 <ul>
 <li>Optional type system with ad-hoc types</li>
 <li>Similar object model to Javascript, but without <code>null</code></li>
@@ -96,27 +98,21 @@ It is recommended to practice with each new idea one at a time.</p>
 <li>Dynamic modules as a way of organizing code</li>
 </ul>
 <h3>How this tutorial is organized</h3>
-<p>Each chapter tells how to do something step by step.</p>
 <p>At the bottom there is a &quot;Comments&quot; section.
 This contains things you might have noticed and things you can try out on your own.</p>
 <h3>Source code</h3>
 <p>You will find the source code for all examples under &quot;examples&quot; in the git repository.</p>
 <h1>Getting started</h1>
-<p>Dyon is written in the Rust programming language.
-You do not need to know Rust to use Dyon.
-These two languages are like yin and yang.
-They are very different in some ways, but complement each other.</p>
 <p>Before you can run Dyon programs, you need to do the following:</p>
 <ol>
 <li>Install <a href="https://www.rust-lang.org/en-US/">Rust</a>.</li>
 <li>Open up the Terminal window</li>
-<li>Type <code>cargo new --bin hello_world</code></li>
+<li>Type <code>cargo new --bin &lt;project name&gt;</code></li>
 </ol>
-<p>Open up Cargo.toml and add the following:</p>
+<p>Open up &quot;Cargo.toml&quot; and add the following:</p>
 <pre><code>[dependencies]
 dyon = 0.8.0
 </code></pre>
-<p>To start a Dyon program we need to write a little Rust.</p>
 <p>Open up &quot;src/main.rs&quot; and type:</p>
 <pre><code class="language-rust">extern crate dyon;
 
@@ -126,8 +122,10 @@ fn main() {
     error(run(&quot;src/main.dyon&quot;));
 }
 </code></pre>
-<p>Create a new file &quot;src/main.dyon&quot; and write:</p>
-<pre><code class="language-dyon">fn main() {
+<h3>Hello World example</h3>
+<p>Source code: examples/hello_world</p>
+<p>Put this in &quot;src/main.dyon&quot;:</p>
+<pre><code class="language-rust">fn main() {
     println(&quot;Hello world!&quot;)
 }
 </code></pre>
@@ -138,7 +136,7 @@ fn main() {
 <pre><code>Hello world!
 </code></pre>
 <h3>Comments</h3>
-<p>A few things you might have noticed:</p>
+<p>You might have noticed:</p>
 <ul>
 <li>Dyon has no &quot;;&quot; at the end of lines</li>
 <li>The &quot;fn&quot; keyword is used by both Rust and Dyon</li>
@@ -155,11 +153,10 @@ fn main() {
 <p>A comment is text to explain how some code works.
 Comments are ignored when running the program.</p>
 <p>Dyon uses <code>//</code> for single-line and <code>/* */</code> for multi-line comments.</p>
-<pre><code class="language-dyon">/*
+<pre><code class="language-rust">/*
 
-  this program was made by
-==== SUPER INTELLIGENCE ====
-from another space dimension
+This text is inside a multi-line comment.
+It is ignored when running the program.
 
 */
 
@@ -169,13 +166,14 @@ fn main() {
 }
 </code></pre>
 <p>A single-line comment ignores the rest of the line:</p>
-<pre><code class="language-dyon">println(&quot;hello&quot;) // Prints `hello`.
+<pre><code class="language-rust">println(&quot;hello&quot;) // Prints `hello`.
 </code></pre>
 <p>A multi-line comment starts with <code>/*</code> and ends with <code>*/</code>.</p>
-<pre><code class="language-dyon">println(/* testing, testing! */ &quot;hello&quot;)
+<pre><code class="language-rust">/* testing, testing! */
+println(&quot;hello&quot;)
 </code></pre>
 <p>You can nest <code>/* */</code>:</p>
-<pre><code class="language-dyon">/*
+<pre><code class="language-rust">/*
     /*
     A comment inside a comment!
     */
@@ -183,13 +181,12 @@ fn main() {
 </code></pre>
 <h3>Tips and tricks</h3>
 <p>It is more common to use <code>//</code> than <code>/* */</code> for documenting the code.</p>
-<p>End a comment with a dot to make it easier to read:</p>
-<pre><code class="language-dyon">// Alice opened the door
+<p>End a comment with a dot to make it easier to see where the line is ending:</p>
+<pre><code class="language-rust">// Alice opened the door
 // by pressing a button.
 </code></pre>
-<p>You can use <code>/* */</code> to ignore some code without removing it.
-This is useful when you try out different programs:</p>
-<pre><code class="language-dyon">/*
+<p>You can use <code>/* */</code> to ignore some code without removing it:</p>
+<pre><code class="language-rust">/*
 fn main() {
     println(&quot;one&quot;)
 }
@@ -199,10 +196,11 @@ fn main() {
     println(&quot;two&quot;)
 }
 </code></pre>
-<p>Organize the code in paragraphs, just like in a book.
+<p>One technique that helps making code more understandable:
+Organize the code in paragraphs, like in a book.
 Write a single-line comment for each paragraph.
-Separate paragraphs with an empty line:</p>
-<pre><code class="language-dyon">fn main() {
+Separate paragraphs with an empty line.</p>
+<pre><code class="language-rust">fn main() {
     // Print the numbers from 1 to 10.
     list := sift i 10 { i + 1 }
     println(list)
@@ -212,39 +210,97 @@ Separate paragraphs with an empty line:</p>
     println(list)
 }
 </code></pre>
+<h1>Functions</h1>
+<p>In Dyon, there are two ways to declare a function.</p>
+<p>One way is to use <code>fn</code> to define a function:</p>
+<pre><code class="language-rust">fn f(x) -&gt; {
+    return x + 1
+}
+</code></pre>
+<p>If a function does not return a value, you leave out <code>-&gt;</code>:</p>
+<pre><code class="language-rust">fn say_hi() {
+    println(&quot;hi!&quot;)
+}
+</code></pre>
+<p>Another way is to use mathematical notation:</p>
+<pre><code class="language-rust">f(x) = x + 1
+</code></pre>
+<h3>Fibonacci example</h3>
+<p>Source code: examples/fibonacci</p>
+<pre><code class="language-rust">fib(x) = if x &lt;= 0 { 0 }
+         else if x == 1 { 1 }
+         else { fib(x-1) + fib(x-2) }
+
+fn main() {
+    for i 20 { println(fib(i)) }
+}
+</code></pre>
+<p>Do not worry if you do not understand the code above.
+This is just to show how to declare a function and call it.</p>
+<h1>Mutability</h1>
+<p>In Dyon, when a function changes an argument, you need to add <code>mut</code>:</p>
+<pre><code class="language-rust">fn foo(mut x) {
+    x = 3
+}
+
+fn main() {
+    a := 2
+    foo(mut a)
+    println(a) // prints `3`
+}
+</code></pre>
+<p>A function that calls a function that changes an argument, also need <code>mut</code>:</p>
+<pre><code class="language-rust">fn foo(mut x) {
+    x = 3
+}
+
+// Requires `mut x` because it calls `foo`.
+fn bar(mut x) {
+    foo(mut x)
+}
+
+fn main() {
+    a := 2
+    bar(mut a)
+    println(a) // prints `3`
+}
+</code></pre>
+<h1>Named arguments</h1>
+<p>In Dyon, you can call some functions in two ways:</p>
+<pre><code class="language-rust">attack__player_enemy(mut player, enemy)
+attack(player: mut player, enemy: enemy)
+</code></pre>
+<p>The named arguments are part of the function name.</p>
 <h1>Variables</h1>
-<p>The name &quot;variable&quot; means something that can change.
-Variables store data inside a program.</p>
-<p>Create a new project &quot;echo&quot;, or edit the &quot;hello_world&quot; project.</p>
-<p>In &quot;src/main.dyon&quot;, type the following:</p>
-<pre><code class="language-dyon">fn main() {
+<pre><code class="language-rust">a := 3 // Create a variable &quot;a&quot; with value `3`.
+a = 4 // Change the value of variable &quot;a&quot; to `4`.
+</code></pre>
+<p>A variable has a name, a type and a value.</p>
+<ul>
+<li>The operator <code>:=</code> creates a variable.</li>
+<li>The operator <code>=</code> changes the value of a variable.</li>
+</ul>
+<p>When changing the value of a variable, the type must be the same:</p>
+<pre><code class="language-rust">a := 3
+a = &quot;hi!&quot; // ERROR
+</code></pre>
+<h3>Echo example</h3>
+<p>Source code: examples/echo</p>
+<p>Create a new project and name it &quot;echo&quot;.</p>
+<p>Put this in &quot;src/main.dyon&quot;:</p>
+<pre><code class="language-rust">fn main() {
     print(&quot;Type something: &quot;)
     line := read_line()
     sleep(1)
     println(line)
 }
 </code></pre>
-<p>The operator <code>:=</code> is used to create a variable.</p>
-<p>A variable has a name, a type and a value.
-The name is &quot;line&quot;, and the value is the result of <code>read_line()</code>.</p>
-<p>The code <code>read_line()</code> returns only variables of type <code>str</code>.
-This becomes the type of the variable with name &quot;line&quot;.</p>
-<h3>Changing value of variables</h3>
-<p>The value of a variable can be changed with the <code>=</code> operator:</p>
-<pre><code class="language-dyon">a := 3
-a = 4
-</code></pre>
-<p>The new value must be of same type as the variable.</p>
-<pre><code class="language-dyon">a := 3
-a = &quot;hi!&quot; // ERROR
-</code></pre>
+<p>This program prints out the text you gave it after 1 second.
+The text is stored inside a variable &quot;line&quot;.</p>
 <h3>Comments</h3>
-<p>A few things you might have noticed:</p>
+<p>You might have noticed:</p>
 <ul>
-<li>Dyon runs the program from top to bottom</li>
-<li>When it has finished one line, it goes to the next one</li>
-<li>The program stops when the last line in &quot;main&quot; is finished</li>
-<li>To use a variable, you must type the exact name</li>
+<li><code>println</code> ends with a new line, while <code>print</code> stays at same line</li>
 </ul>
 <p>Some things you can try:</p>
 <ol>
@@ -256,7 +312,7 @@ a = &quot;hi!&quot; // ERROR
 <h1>Numbers</h1>
 <p>A number in Dyon is a variable that stores floats with 64 bit precision.
 The type is <code>f64</code>.</p>
-<pre><code class="language-dyon">a := 1
+<pre><code class="language-rust">a := 1
 b := .5
 c := 2.5
 d := -3
@@ -265,7 +321,7 @@ f := 1e6
 g := -7_034.52e-22
 </code></pre>
 <p>You can add, subtract, multiply, divide, take the power and find the division reminder:</p>
-<pre><code class="language-dyon">a := 2
+<pre><code class="language-rust">a := 2
 b := a + 3
 c := a - 3
 d := a * 3
@@ -275,7 +331,7 @@ g := a % 3
 </code></pre>
 <h3>Relative change</h3>
 <p>The following operators change the value:</p>
-<pre><code class="language-dyon">a = a + 1
+<pre><code class="language-rust">a = a + 1
 a += 1
 
 a = a - 1
@@ -301,7 +357,7 @@ a %= 2
 This represent text.
 The type is <code>str</code>.</p>
 <p>Use double quotes to write a string:</p>
-<pre><code class="language-dyon">a := &quot;hi!&quot;
+<pre><code class="language-rust">a := &quot;hi!&quot;
 </code></pre>
 <p>The <code>\</code> symbol escapes special characters:</p>
 <ul>
@@ -313,11 +369,11 @@ The type is <code>str</code>.</p>
 <li><code>\u005c</code> - Unicode character by 4 hexadecimal code</li>
 </ul>
 <p>The <code>+</code> operator joins two strings together:</p>
-<pre><code class="language-dyon">name := &quot;Santa&quot;
+<pre><code class="language-rust">name := &quot;Santa&quot;
 title := &quot;hi &quot; + name
 </code></pre>
 <p>The <code>str</code> function converts a value into a string:</p>
-<pre><code class="language-dyon">age := 58
+<pre><code class="language-rust">age := 58
 println(&quot;Bilbo is &quot; + str(age) + &quot; years old!&quot;)
 </code></pre>
 <h1>Booleans</h1>
@@ -336,25 +392,25 @@ The type is <code>bool</code>.</p>
 <tr><td>true   </td><td>true   </td><td>true   </td><td>true  </td><td>false  </td><td>false</td></tr>
 </table>
 <p>There are 4 operators for AND:</p>
-<pre><code class="language-dyon">a &amp;&amp; b // lazy
+<pre><code class="language-rust">a &amp;&amp; b // lazy
 a and b // eager
 a ∧ b // eager
 a * b // eager
 </code></pre>
 <p>There are 4 operators for OR:</p>
-<pre><code class="language-dyon">a || b // lazy
+<pre><code class="language-rust">a || b // lazy
 a or b // eager
 a ∨ b // eager
 a + b // eager
 </code></pre>
 <p>There is 1 operator for XOR:</p>
-<pre><code class="language-dyon">a ^ b
+<pre><code class="language-rust">a ^ b
 </code></pre>
 <p>There is 1 operator for EXC:</p>
-<pre><code class="language-dyon">a - b
+<pre><code class="language-rust">a - b
 </code></pre>
 <p>There are 2 operators for NOT:</p>
-<pre><code class="language-dyon">!a
+<pre><code class="language-rust">!a
 ¬a
 </code></pre>
 <h3>Why more than one way</h3>
@@ -368,15 +424,99 @@ a + b // eager
 <p>Logic use <code>∧</code>, <code>∨</code> and <code>¬</code>.</p>
 <p>Non-invertible sets use <code>*</code>, <code>+</code> and <code>-</code>.</p>
 <p>In the future Dyon might get more features for Boolean algebra.</p>
+<h1>4D vectors</h1>
+<p>In Dyon, you can compute with 4D vectors:</p>
+<pre><code>(x, y, z, w)
+</code></pre>
+<p>Many operations are built-in for working with 4D vectors:</p>
+<pre><code class="language-rust">a := (1, 2, 3, 4)
+b := (5, 6, 7, 8)
+println(a + b) // prints `(6, 8, 10, 12)`
+</code></pre>
+<p>The components <code>z</code> and <code>w</code> are set to 0 by default:</p>
+<pre><code class="language-rust">a := (1, 2)
+</code></pre>
+<p>The <code>y</code> component can also be set to 0, but requires &quot;,&quot;:</p>
+<pre><code class="language-rust">a := (1,)
+</code></pre>
+<h3>HTML hex colors</h3>
+<p>A HTML hex color is converted into a 4D vector:</p>
+<pre><code>a := #ff0000 // red
+b := #00ff00 // green
+c := #0000ff // blue
+d := #00000033 // semi-transparent black
+</code></pre>
+<h3>Swizzle components</h3>
+<p>To swizzle components, you can use this notation:</p>
+<pre><code class="language-rust">a := (1, 2)
+b := (yx a,)
+</code></pre>
+<p>You can repeat a component up to 4 times:</p>
+<pre><code class="language-rust">a := (1, 2)
+b := (yyyy a,)
+println(b) // prints `(2, 2, 2, 2)`
+</code></pre>
+<h3>Calling functions</h3>
+<p>When calling a function, you can unpack vector components:</p>
+<pre><code class="language-rust">add(x, y) = x + y
+
+fn main() {
+    a := (1, 2)
+    println(add(xy a)) // prints `3`
+}
+</code></pre>
+<p>If a function takes named arguments, you can use this trick:</p>
+<pre><code class="language-rust">add__x_y(x, y) = x + y
+
+fn main() {
+    a := (1, 2)
+    println(add(x_y: xy a)) // prints `3`
+}
+</code></pre>
+<h3>Addition and multiplication</h3>
+<p>Addition and multiplication is per component for two vectors.</p>
+<pre><code class="language-rust">(1, 2) + (3, 4) // `(4, 6)`
+(1, 2) * (3, 4) // `(3, 8)`
+</code></pre>
+<p>Scalar addition, multiplication and division is allowed on both sides
+and is per component.</p>
+<pre><code class="language-rust">(1, 2) + 1 // `(2, 3, 1, 1)`
+3 + (1, 2) // `(4, 5, 3, 3)`
+(1, 2) * 2 // `(2, 4)`
+2 * (1, 2) // `(2, 4)`
+(1, 2) / 2 // `(0.5, 1)`
+2 / (1, 2, 4, 8) // `(2, 1, 0.5, 0.25)`
+</code></pre>
+<h3>Dot product</h3>
+<p>Dot product of two vectors can be written in two ways:</p>
+<pre><code class="language-rust">a := (1, 2)
+b := (3, 4)
+println(a *. b)
+println(a · b)
+</code></pre>
+<h3>Cross product</h3>
+<p>Cross product of two vectors can be written in two ways:</p>
+<pre><code class="language-rust">a := (1, 2)
+b := (3, 4)
+println(a x b)
+println(a ⨯ b)
+</code></pre>
+<h3>Norm</h3>
+<p>The norm of a vector, also called &quot;length&quot; or &quot;magnitude&quot;:</p>
+<pre><code class="language-rust">a := (3, 4)
+println(|a|)
+</code></pre>
+<h3>Precision</h3>
+<p>Whenever you do calculations with 4D vectors, you get float 32 bit precision.</p>
 <h1>Arrays</h1>
 <p>An array stores a list of values. The type is <code>[]</code>.</p>
-<pre><code class="language-dyon">a := [1, 2, 3]
+<pre><code class="language-rust">a := [1, 2, 3]
 </code></pre>
 <p>You can store values of different types in the same array:</p>
-<pre><code class="language-dyon">a := [1, &quot;hi&quot;, [1, 2, 3]]
+<pre><code class="language-rust">a := [1, &quot;hi&quot;, [1, 2, 3]]
 </code></pre>
 <p>To access an value inside an array, you use a number that start at <code>0</code>:</p>
-<pre><code class="language-dyon">a := [1, 2, 3]
+<pre><code class="language-rust">a := [1, 2, 3]
 println(a[0]) // prints `1`
 println(a[1]) // prints `2`
 println(a[2]) // prints `3`
@@ -384,7 +524,7 @@ println(a[2]) // prints `3`
 <h3>Multi-dimensional arrays</h3>
 <p>An array can contain arrays.
 This makes it possible to represent grids in 2D, 3D etc.</p>
-<pre><code class="language-dyon">a := [1, 2, 3] // 1D
+<pre><code class="language-rust">a := [1, 2, 3] // 1D
 println(a[0]) // prints `1`
 
 b :=  [ // 2D
@@ -400,10 +540,505 @@ c :=  [ // 3D
       ]
 println(a[0][0][0]) // prints `1`
 </code></pre>
+<h3>Memory</h3>
+<p>Each item in an array takes 24 bytes (64 bit platforms):</p>
+<ul>
+<li>8 bytes for type information</li>
+<li>16 bytes for item data</li>
+</ul>
+<p>This is optimized to store 4D vectors.</p>
 <h1>Objects</h1>
 <p>An object stores a list of values, organized as a dictionary. The type is <code>{}</code>.</p>
-<pre><code class="language-dyon">a := {x: 1, y: &quot;hi&quot;}
+<pre><code class="language-rust">a := {x: 1, y: &quot;hi&quot;}
 </code></pre>
+<p>To change a value in an object:</p>
+<pre><code class="language-rust">a.x = 2
+</code></pre>
+<p>Alternative:</p>
+<pre><code class="language-rust">a[&quot;x&quot;] = 2
+</code></pre>
+<p>The value must be of the same type.</p>
+<p>If you want to change the type, use <code>:=</code>:</p>
+<pre><code class="language-rust">a.x := &quot;hi!&quot;
+</code></pre>
+<p>Insert new keys and values with <code>:=</code>:</p>
+<pre><code class="language-rust">a := {}
+a.x := 1
+a.y := 2
+a.z := 3
+</code></pre>
+<h1>Links</h1>
+<p>A link in Dyon is a variable that stores <code>bool</code>, <code>f64</code> and <code>str</code> efficiently.
+It is called &quot;link&quot; because it is fast and easy to put together data.</p>
+<pre><code class="language-rust">name := &quot;John&quot;
+a := link {&quot;Hi &quot;name&quot;!&quot;}
+</code></pre>
+<p>The data inside a link can not be changed.
+You can read the data using <code>head</code> and <code>tail</code>:</p>
+<pre><code class="language-rust">a := link { 1 2 3 }
+b := head(a) // `some(1)`
+c := tail(a) // `link { 2 3 }`
+</code></pre>
+<p>When you put a link inside a link, it gets flattened:</p>
+<pre><code class="language-rust">a := link { 1 2 3 }
+// `link { &quot;start &quot;1 2 3&quot; end&quot; }`
+b := link { &quot;start &quot;a&quot; end&quot; }
+</code></pre>
+<h3>When to use links</h3>
+<p>Links are often used to:</p>
+<ul>
+<li>Generate lots of data and then convert to <code>str</code></li>
+<li>Pre-process parts of a text template</li>
+<li>Generate a web page</li>
+<li>Code generation</li>
+<li>Store lots of <code>f64</code>, <code>bool</code> or <code>str</code> in memory</li>
+</ul>
+<p>Because of the easy syntax for links, you can use Dyon as a template language.</p>
+<h3>Memory</h3>
+<p>The memory of a link is divided into blocks of 1024 bytes (64 bit platforms).</p>
+<p>A link takes only 3.2% extra memory than the ideal amount when blocks are filled.</p>
+<p>To save memory with a link compared to an array, you need 42 items:</p>
+<pre><code class="language-rust">a := link {
+        0 1 2 3 4 5 6 7 8
+        9 10 11 12 13 14 15 16
+        17 18 19 20 21 22 23 24
+        25 26 27 28 29 30 31 32
+        33 34 35 36 37 38 39 40
+        41 42
+    }
+</code></pre>
+<h3>Other operators</h3>
+<p>You can use <code>+=</code> (back) and <code>-=</code> (front) to link together link blocks.
+This is faster, but uses a little more memory.</p>
+<p>You can not use <code>+</code> because it is too easy to waste memory by error.</p>
+<h1>Closures</h1>
+<p>A closure in Dyon is a variable that works similar to a mathematical function.</p>
+<pre><code class="language-rust">a := \(x) = x + 1
+</code></pre>
+<p>You can print out a closure:</p>
+<pre><code class="language-rust">// prints `\(x: any) = x + 1`
+println(\(x) = x + 1)
+</code></pre>
+<p>To call a closure, use the <code>\</code> character before the name:</p>
+<pre><code class="language-rust">a := \(x) = x + 1
+println(\a(0)) // prints `1`
+</code></pre>
+<h3>Grab</h3>
+<p>Use <code>grab</code> to compute a value and insert it into a closure:</p>
+<pre><code class="language-rust">a := 2
+b := \(x) = (grab a + 2) + x
+// prints `\(x: any) = 4 + x`
+println(b)
+</code></pre>
+<p>When a closure is inside another closure, you can use <code>grab '2</code>:</p>
+<pre><code class="language-rust">a := 2
+b := \(x) = \(y) = (grab '2 a) + (grab x) + y
+// prints `\(x: any) = \(y: any) = 2 + (grab x) + y`
+println(b)
+// prints `\(y: any) = 2 + 0 + y`
+println(\b(0))
+</code></pre>
+<p>You can use <code>grab 'N</code> where <code>N</code> is the level you want to compute from.</p>
+<h1>Options</h1>
+<p>In Dyon, optional values are wrapped in <code>some(x)</code> or <code>none()</code>.
+The type is <code>opt</code>, which defaults to <code>opt[any]</code>.</p>
+<p>The <code>unwrap</code> function returns the value inside <code>some(x)</code>.</p>
+<pre><code class="language-rust">fn main() {
+    a := some(5)
+    if a != none() {
+        println(unwrap(a)) // prints `5`
+    }
+}
+</code></pre>
+<h1>Results</h1>
+<p>In Dyon, results are wrapped in <code>ok(x)</code> or <code>err(x)</code>.
+The type is <code>res</code> which defaults to <code>res[any]</code>.
+The error type is always <code>any</code>.</p>
+<pre><code class="language-rust">fn main() {
+    a := ok(5)
+    if is_ok(a) {
+        println(unwrap(a)) // prints `5`
+    }
+}
+</code></pre>
+<h1>Threads</h1>
+<p>In Dyon, a thread is created with the <code>go</code> keyword:</p>
+<pre><code class="language-rust">fn find_sum(n: f64) -&gt; f64 {
+    return sum i n { i + 1 }
+}
+
+fn main() {
+    a := go find_sum(1_000_000)
+    println(unwrap(join(thread: a))) // prints `500000500000`
+}
+</code></pre>
+<h1>If</h1>
+<p>In Dyon, the <code>if</code> keyword runs a block if its condition is true:</p>
+<pre><code class="language-rust">a := 3 &lt; 4
+if a {
+    println(&quot;hi!&quot;)
+}
+</code></pre>
+<p>An <code>else</code> block runs when previous conditions are false:</p>
+<pre><code class="language-rust">a := 3 &gt; 4
+if a {
+    println(&quot;yes!&quot;)
+} else {
+    println(&quot;no...&quot;)
+}
+</code></pre>
+<p>An <code>else if</code> block runs when previous conditions are false and its condition is true:</p>
+<pre><code class="language-rust">a := 2
+if a == 0 {
+    println(&quot;=0&quot;)
+} else if a == 1 {
+    println(&quot;=1&quot;)
+} else if a == 2 {
+    println(&quot;=2&quot;)
+} else {
+    println(&quot;&gt;2&quot;)
+}
+</code></pre>
+<p>An <code>if</code> can be put in an expression:</p>
+<pre><code class="language-rust">a := 3
+b := 3
+c := 2 + if a == b { 1 } else { 0 }
+</code></pre>
+<h1>Loops</h1>
+<p>In Dyon there are 3 kinds of loops:</p>
+<ul>
+<li>Infinite loop</li>
+<li>Traditional For loop</li>
+<li>Mathematical loops</li>
+</ul>
+<h3>Infinite loop</h3>
+<pre><code class="language-rust">loop {
+    println(&quot;hi!&quot;)
+    sleep(1)
+}
+</code></pre>
+<p>An infinite loop runs runs forever, or until <code>break</code> is used inside it.</p>
+<p>Tip: Use Ctrl+C to terminate an infinite loop in the Terminal window.</p>
+<h3>Traditional For loop</h3>
+<pre><code class="language-rust">for i := 0; i &lt; 10; i += 1 {
+    println(i)
+}
+</code></pre>
+<p>A traditional loop is similar to the loop in the programming language C.
+It takes 3 expressions:</p>
+<ul>
+<li>Initialize, called first and once, e.g. <code>i := 0</code></li>
+<li>Condition, checked for each turn, e.g. <code>i &lt; 10</code></li>
+<li>Step, called after each turn, e.g. <code>i += 1</code></li>
+</ul>
+<h3>Mathematical loops</h3>
+<p>Dyon is famous for its mathematical loops:</p>
+<ul>
+<li><code>for</code> - do something for each turn</li>
+<li><code>sift</code> - create an array out of values</li>
+<li><code>min</code> - find the minimum value</li>
+<li><code>max</code> - find the maximum value</li>
+<li><code>∃</code>/<code>any</code> - check whether a condition is true for any value</li>
+<li><code>∀</code>/<code>all</code> - check whether a condition is true for all values</li>
+<li><code>∑</code>/<code>sum</code> - add values to get the sum</li>
+<li><code>∏</code>/<code>prod</code> - multiply values to get the product</li>
+</ul>
+<p>In mathematics, it is very common to loop over an index.
+An index starts at 0, and increases with 1 for each turn.
+All mathematical loops uses the same index notation.</p>
+<pre><code class="language-rust">for i 10 {
+    println(i)
+}
+</code></pre>
+<p>This is equivalent to <code>for i := 0; i &lt; 10; i += 1</code>.</p>
+<p>You can also specify the start and end value:</p>
+<pre><code class="language-rust">for i [0, 10) {
+    println(i)
+}
+</code></pre>
+<h1>Break</h1>
+<p>The <code>break</code> keyword exits a loop:</p>
+<pre><code class="language-rust">a := 4
+loop {
+    a -= 1
+    if a &lt; 0 { break }
+}
+</code></pre>
+<p>To exit an outer loop, use a label:</p>
+<pre><code class="language-rust">'outer: loop {
+    loop {
+        break 'outer
+    }
+}
+</code></pre>
+<h1>Continue</h1>
+<p>The <code>continue</code> keyword goes to the next turn.</p>
+<pre><code class="language-rust">loop {
+    sleep(1)
+    continue
+    println(&quot;hi&quot;) // never called
+}
+</code></pre>
+<p>To go to the next turn of an outer loop, use a label:</p>
+<pre><code class="language-rust">'outer: loop {
+    loop {
+        continue 'outer
+    }
+}
+</code></pre>
+<h1>Infer range</h1>
+<p>In Dyon, the range of a mathematical loop can be inferred from the loop body.</p>
+<p>You can leave out the start and end if you use an index on a list:</p>
+<pre><code class="language-rust">list := [1, 2, 3]
+
+for i {
+    println(list[i])
+}
+</code></pre>
+<p>This is equivalent to:</p>
+<pre><code class="language-rust">list := [1, 2, 3]
+
+for i len(list) {
+    println(list[i])
+}
+</code></pre>
+<p>For nested loops, the indices must follow the same order as the loops:</p>
+<pre><code class="language-rust">list := [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]
+for i {
+    for j {
+        for k {
+            println(list[i][j][k])
+        }
+    }
+}
+</code></pre>
+<h1>Packed loops</h1>
+<p>In Dyon, you can pack mathematical loops together of the same kind:</p>
+<pre><code class="language-rust">for i, j, k {
+    println(list[i][j][k])
+}
+</code></pre>
+<p>This is equivalent to:</p>
+<pre><code class="language-rust">for i {
+    for j {
+        for k {
+            println(list[i][j][k])
+        }
+    }
+}
+</code></pre>
+<h1>Secrets</h1>
+<p>In Dyon, a secret is a hidden array of values associated with a <code>bool</code> or <code>f64</code>.</p>
+<p>Use <code>explain_why</code> to add a secret to a <code>bool</code>:</p>
+<pre><code class="language-rust">a := explain_why(true, &quot;hi!&quot;)
+if a {
+    println(why(a)) // prints `[&quot;hi!&quot;]`
+}
+</code></pre>
+<p>Use <code>explain_where</code> to add a secret to a <code>f64</code>:</p>
+<pre><code class="language-rust">a := explain_where(2.5, &quot;giant&quot;)
+println(where(a)) // prints `[&quot;giant&quot;]`
+</code></pre>
+<p>A secret propagates from the left argument of a binary operator:</p>
+<pre><code class="language-rust">a := explain_where(2.5, &quot;giant&quot;)
+is_tall := a &gt; 2.0
+if is_tall {
+    println(why(is_tall)) // prints `[&quot;giant&quot;]`
+}
+</code></pre>
+<p>When using a <code>min</code>, <code>max</code>, <code>any</code> or <code>all</code>, the indices are automatically added as secrets:</p>
+<pre><code class="language-rust">list := [[1, 2], [3, 4]]
+println(why(any i, j { list[i][j] &gt; 2 })) // prints `[1, 0]`
+</code></pre>
+<h1>Current objects</h1>
+<p>In Dyon, a current object is a variable that can be accessed by name.</p>
+<p>To create a current object, use <code>~</code> when declaring a variable:</p>
+<pre><code class="language-rust">fn main() {
+    ~ list := [1, 2, 3]
+    print_list()
+}
+
+// Get the current object with name `list`.
+fn print_list() ~ list {
+    for i { println(list[i]) }
+}
+</code></pre>
+<p>A new current object overrides the old one until it runs out of scope:</p>
+<pre><code class="language-rust">fn main() {
+    ~ a := 2
+    foo() // prints `2`
+    {
+        ~ a := 3
+        foo() // prints `3`
+    }
+    foo() // prints `2`
+}
+
+fn foo() ~ a {
+    println(a)
+}
+</code></pre>
+<h1>Types</h1>
+<p>In Dyon, there are two kinds of types:</p>
+<ul>
+<li>Runtime types, which only has one level</li>
+<li>Static types, which can have more than one level</li>
+</ul>
+<h3>Runtime types</h3>
+<p>Runtime types are checked with the <code>typeof</code> function:</p>
+<pre><code class="language-rust">fn main() {
+    println(typeof(1.2)) // prints `number`
+    println(typeof(true)) // prints `boolean`
+    println(typeof(&quot;hi!&quot;)) // prints `string`
+    println(typeof((1, 2))) // prints `vec4`
+    println(typeof([1, 2, 3])) // prints `array`
+    println(typeof({a: 2})) // prints `object`
+    println(typeof(link { 1 2 3 })) // prints `link`
+    println(typeof(some(2))) // prints `option`
+    println(typeof(ok(2))) // prints `result`
+    println(typeof(go foo())) // prints `thread`
+    println(typeof(\(x) = x + 1)) // prints `closure`
+    println(typeof(unwrap(load(&quot;src/main.dyon&quot;)))) // prints `rust_object`
+}
+
+fn foo() -&gt; { return ok(2) }
+</code></pre>
+<h3>Static types</h3>
+<p>Function arguments can have specify a static type:</p>
+<pre><code class="language-rust">fn foo(a: f64) { ... }
+</code></pre>
+<p>By default this is <code>any</code>.</p>
+<p>Static types are used by the type checker to check for errors:</p>
+<ul>
+<li><code>any</code>, any type</li>
+<li><code>f64</code>, number</li>
+<li><code>bool</code>, boolean</li>
+<li><code>str</code>, string</li>
+<li><code>vec4</code>, 4D vector</li>
+<li><code>[]</code>, array, defaults to <code>[any]</code></li>
+<li><code>{}</code>, object</li>
+<li><code>link</code>, link</li>
+<li><code>opt</code>, defaults to <code>opt[any]</code></li>
+<li><code>res</code>, defaults to <code>res[any]</code></li>
+<li><code>thr</code>, defaults to <code>thr[any]</code></li>
+<li>Closure type, e.g. <code>\(any, ..) -&gt; any</code></li>
+<li>Ad-hoc type, e.g. <code>Foo</code>, defaults to <code>Foo {}</code></li>
+</ul>
+<p>There is no static type for Rust objects. Use an ad-hoc type, e.g. <code>Foo any</code>.</p>
+<h1>Ad-hoc types</h1>
+<p>In Dyon, an ad-hoc type is a type that you just give a name:</p>
+<pre><code class="language-rust">fn new_person(first_name: str, last_name: str) -&gt; Person {
+    return {
+        first_name: clone(first_name),
+        last_name: clone(last_name)
+    }
+}
+
+fn say_hello(person: Person) {
+    println(&quot;Hi &quot; + person.first_name + &quot;!&quot;)
+}
+
+fn main() {
+    homer := new_person(&quot;Homer&quot;, &quot;Simpson&quot;)
+    say_hello(homer) // prints `Hi Homer!`
+}
+</code></pre>
+<p>You can use any name that is not used by other Dyon types.
+It is common to use CamelCase.</p>
+<p><code>Person</code> is the same as <code>Person {}</code>, where <code>{}</code> is the inner type.</p>
+<p>The inner type goes with the ad-hoc type and vice versa:</p>
+<pre><code class="language-rust">fn say_hello(person: Person) {
+    println(&quot;Hi &quot; + person.first_name + &quot;!&quot;)
+}
+
+fn main() {
+    say_hello({first_name: &quot;Homer&quot;}) // prints `Hi Homer!`
+}
+</code></pre>
+<h1>Lifetimes</h1>
+<p>In Dyon, a lifetime tells whether an argument outlives another argument.</p>
+<h3>Lifetimes are rare</h3>
+<p>In normal programming there is little need to worry about lifetimes.</p>
+<p>For example, use <code>clone</code> when putting a variable inside another:</p>
+<pre><code class="language-rust">fn put(a, mut b) {
+    b[0] = clone(a)
+}
+</code></pre>
+<p>Instead of:</p>
+<pre><code class="language-rust">fn put(a: 'b, mut b) {
+    b[0] = a
+}
+</code></pre>
+<p>It is useful to know how lifetimes work, but you rarely need them in practice.</p>
+<h3>Lifetimes replaces garbage collector</h3>
+<p>Some languages can have a pointer to a variable that does not exist.
+When this happens, it is called &quot;dangling pointer&quot;.
+This can lead to unpredictable behavior and system crashes.
+Languages that allow dangling pointer are unsafe,
+and the programmer must be extra careful.</p>
+<p>Many languages use a garbage collector to avoid dangling pointers.
+Instead of removing the variable that the pointer points to,
+it keeps it around in memory until all its pointers are gone.</p>
+<p>Dyon uses static lifetime checks to ensure that dangling pointers are impossible.
+This removes the need for a garbage collector.</p>
+<h3>Lifetimes tell the order of declaration</h3>
+<p>A lifetime tells whether an argument outlives another argument:</p>
+<pre><code class="language-rust">// `a` outlives `b`
+fn put(a: 'b, mut b) {
+    b[0] = a
+}
+
+fn main() {
+    a := [2, 3]     // - lifetime of `a`
+                    // |
+    b := [[]]       // |  - lifetime of `b`
+                    // |  |
+    put(a, mut b)   // |  |
+}
+</code></pre>
+<p>The variable &quot;a&quot; outlives &quot;b&quot; because it is declared before &quot;b&quot;.</p>
+<p>The same program can be written like this:</p>
+<pre><code class="language-rust">fn main() {
+    a := [2, 3]
+    b := [[]]
+    b[0] = a
+}
+</code></pre>
+<p>Here, the order of the declared variables is known.</p>
+<h1>Error handling</h1>
+<p>In Dyon, error handling use the <code>?</code> operator to propagate errors.</p>
+<pre><code class="language-rust">fn try_divide(a: f64, b: f64) -&gt; res[f64] {
+    return if b == 0 { err(&quot;Division by zero&quot;) }
+           else { ok(a / b) }
+}
+
+fn foo(b: f64) -&gt; res {
+    a := try_divide(5, b)?
+    return ok(a + 2)
+}
+
+fn main() {
+    println(foo(2)) // prints `ok(4.5)`
+    println(foo(0)) // prints `err(&quot;Division by zero&quot;)`
+}
+</code></pre>
+<p>When using <code>unwrap</code>, an error is reported with a trace of all <code>?</code> operations:</p>
+<pre><code class="language-rust">println(unwrap(foo(0)))
+</code></pre>
+<pre><code>--- ERROR ---
+main (source/test.dyon)
+unwrap
+
+Division by zero
+In function `foo` (source/test.dyon)
+7,10:     a := try_divide(5, b)?
+7,10:          ^
+
+15,20:     println(unwrap(foo(0)))
+15,20:                    ^
+</code></pre>
+<p>An <code>opt</code> is converted into <code>res</code> when using <code>?</code>,
+with the error &quot;Expected <code>some(_)</code>, found `none()&quot;.</p>
 
                 </div>
 

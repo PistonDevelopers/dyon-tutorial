@@ -2,19 +2,19 @@
 
 An array stores a list of values. The type is `[]`.
 
-```dyon
+```rust
 a := [1, 2, 3]
 ```
 
 You can store values of different types in the same array:
 
-```dyon
+```rust
 a := [1, "hi", [1, 2, 3]]
 ```
 
 To access an value inside an array, you use a number that start at `0`:
 
-```dyon
+```rust
 a := [1, 2, 3]
 println(a[0]) // prints `1`
 println(a[1]) // prints `2`
@@ -26,7 +26,7 @@ println(a[2]) // prints `3`
 An array can contain arrays.
 This makes it possible to represent grids in 2D, 3D etc.
 
-```dyon
+```rust
 a := [1, 2, 3] // 1D
 println(a[0]) // prints `1`
 
@@ -43,3 +43,12 @@ c :=  [ // 3D
       ]
 println(a[0][0][0]) // prints `1`
 ```
+
+### Memory
+
+Each item in an array takes 24 bytes (64 bit platforms):
+
+- 8 bytes for type information
+- 16 bytes for item data
+
+This is optimized to store 4D vectors.
