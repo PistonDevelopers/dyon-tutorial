@@ -1,6 +1,7 @@
 # Threads
 
-In Dyon, a thread is created with the `go` keyword:
+In Dyon, a thread is created with the `go` keyword.
+The type is `thr`, which defaults to `thr[any]`.
 
 ```rust
 fn find_sum(n: f64) -> f64 {
@@ -12,3 +13,5 @@ fn main() {
     println(unwrap(join(thread: a))) // prints `500000500000`
 }
 ```
+
+A thread runs in parallel.

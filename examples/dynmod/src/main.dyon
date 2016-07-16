@@ -1,0 +1,5 @@
+fn main() {
+    math := unwrap(load("src/math.dyon"))
+    game := unwrap(load(source: "src/game.dyon", imports: [math]))
+    call(game, "main", [])
+}

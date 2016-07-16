@@ -130,6 +130,27 @@ a := (3, 4)
 println(|a|)
 ```
 
+### Un-loops
+
+The `vec4`, `vec3`, `vec2` are un-rolled and replaces the index with a number:
+
+```rust
+fn main() {
+    a := vec4 i { i + 1 }
+    println(a) // prints `(1, 2, 3, 4)`
+}
+```
+
+You can check this by printing out a closure:
+
+```rust
+fn main() {
+    a := \() = vec4 i { i + 1 }
+    // prints `\() = ({ 0 + 1 }, { 1 + 1 }, { 2 + 1 }, { 3 + 1 })`
+    println(a)
+}
+```
+
 ### Precision
 
 Whenever you do calculations with 4D vectors, you get float 32 bit precision.

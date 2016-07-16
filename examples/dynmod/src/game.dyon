@@ -1,0 +1,5 @@
+fn main() {
+    a := 2
+    b := 3
+    println(add(a, b)) // prints `5`
+}
