@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>The Dyon Programming Language</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+
+        <!-- MathJax -->
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = localStorage.getItem('theme');
+            if (theme == null) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = localStorage.getItem('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html"><strong>3.</strong> Comments</a></li><li><a href="./functions.html"><strong>4.</strong> Functions</a></li><li><ul class="section"><li><a href="./mutability.html"><strong>4.1.</strong> Mutability</a></li><li><a href="./named-arguments.html"><strong>4.2.</strong> Named arguments</a></li><li><a href="./return.html"><strong>4.3.</strong> Return</a></li></ul></li><li><a href="./blocks.html"><strong>5.</strong> Blocks</a></li><li><a href="./variables.html"><strong>6.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>6.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>6.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>6.3.</strong> Booleans</a></li><li><a href="./4d-vectors.html"><strong>6.4.</strong> 4D vectors</a></li><li><a href="./arrays.html"><strong>6.5.</strong> Arrays</a></li><li><a href="./objects.html"><strong>6.6.</strong> Objects</a></li><li><a href="./links.html"><strong>6.7.</strong> Links</a></li><li><a href="./closures.html"><strong>6.8.</strong> Closures</a></li><li><a href="./options.html"><strong>6.9.</strong> Options</a></li><li><a href="./results.html"><strong>6.10.</strong> Results</a></li><li><a href="./threads.html"><strong>6.11.</strong> Threads</a></li></ul></li><li><a href="./if.html"><strong>7.</strong> If</a></li><li><a href="./loops.html"><strong>8.</strong> Loops</a></li><li><ul class="section"><li><a href="./break.html"><strong>8.1.</strong> Break</a></li><li><a href="./continue.html"><strong>8.2.</strong> Continue</a></li><li><a href="./infer-range.html"><strong>8.3.</strong> Infer range</a></li><li><a href="./packed-loops.html"><strong>8.4.</strong> Packed loops</a></li></ul></li><li><a href="./secrets.html"><strong>9.</strong> Secrets</a></li><li><a href="./current-objects.html"><strong>10.</strong> Current objects</a></li><li><a href="./types.html"><strong>11.</strong> Types</a></li><li><ul class="section"><li><a href="./ad-hoc-types.html"><strong>11.1.</strong> Ad-hoc types</a></li><li><a href="./complain-when-wrong.html"><strong>11.2.</strong> Complain when wrong</a></li></ul></li><li><a href="./lifetimes.html"><strong>12.</strong> Lifetimes</a></li><li><a href="./error-handling.html"><strong>13.</strong> Error handling</a></li><li><a href="./copy-on-write.html" class="active"><strong>14.</strong> Copy-on-write</a></li><li><a href="./dynamic-modules.html"><strong>15.</strong> Dynamic modules</a></li><li><a href="./look-up-functions.html"><strong>16.</strong> Look up functions</a></li><li><a href="./optimize-performance.html"><strong>17.</strong> Optimize performance</a></li><li><a href="./interop-with-rust.html"><strong>18.</strong> Interop with Rust</a></li><li><ul class="section"><li><a href="./lib-dyon.html"><strong>18.1.</strong> lib.dyon</a></li><li><a href="./mutability-interop.html"><strong>18.2.</strong> Mutability interop</a></li><li><a href="./lifetime-interop.html"><strong>18.3.</strong> Lifetime interop</a></li><li><a href="./manual-interface.html"><strong>18.4.</strong> Manual interface</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title">The Dyon Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <h1>Copy-on-write</h1>
+<p>In Dyon, arrays and objects uses atomic reference counting (Arc).</p>
+<p>Whenever there are two non-stack references to the same array,
+it will create a copy when changing the array:</p>
+<pre><code class="language-rust">fn main() {
+    // `[1, 2]` is inside an array,
+    // and is therefore not stored in stack memory.
+    a := [[1, 2]]
+    // Create another reference to `[1, 2]`
+    b := [a[0]]
+    b[0][0] = 3
+    println(b[0][0])
+    // The old `[1, 2]` array remains unchanged.
+    println(a[0][0])
+}
+</code></pre>
+<p>This means that methods, the building-block of OOP patterns, are impossible to use in Dyon:</p>
+<pre><code class="language-rust">fn foo(mut a) {
+    a[0] = 3
+}
+
+fn main() {
+    // `[1, 2]` is inside an array,
+    // and is therefore not stored in stack memory.
+    a := [[1, 2]]
+    // When we pass it as argument,
+    // the reference counter is increased.
+    foo(mut a[0])
+    // The value remains unchanged,
+    // because `foo` changed a copy.
+    println(a[0][0]) // prints `1`
+}
+</code></pre>
+<p>To modify variables inside other variables, it must be declared on the stack:</p>
+<pre><code class="language-rust">fn foo(mut a) {
+    a[0] = 3
+}
+
+fn main() {
+    // `[1, 2]` is put on the stack.
+    list := [1, 2]
+    // Putting a stack reference to `list` inside `a`
+    a := [list]
+    // When we pass it as argument,
+    // the stack reference is passed.
+    foo(mut a[0])
+    // The value is changed.
+    println(a[0][0]) // prints `3`
+}
+</code></pre>
+<h3>Data oriented design</h3>
+<p>When writing programs in Dyon, you need to avoid copy-on-write.
+The easiest way to do this is to organize application structure in flat arrays.</p>
+<ul>
+<li>Do not worry about having lots of arrays</li>
+<li>Use current objects to pass arrays around</li>
+<li>Batch changes to arrays together by iterating over them</li>
+</ul>
+<p>Optimize the data structure for the algorithms that processes it.
+When the algorithm changes, the data structure changes too!</p>
+<h3>Dyon is a scripting language</h3>
+<p>If you need OOP patterns, then there is only one solution: Use another language, for example Rust.
+Dyon is designed for scripting, as in solving problems fast.
+It is not designed for building abstractions, or proving things through the type system.</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a href="./error-handling.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="./dynamic-modules.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./error-handling.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./dynamic-modules.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>
