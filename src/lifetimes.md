@@ -94,7 +94,7 @@ therefore `bool`, `f64` and `str` follows same rules as `[]` or `{}`:
 
 ```rust
 fn foo(a: f64) -> {
-    return a //
+    return a // ERROR
 }
 ```
 
@@ -103,14 +103,14 @@ fn foo(a: f64) -> {
 In `source/test.dyon`:
 
 Requires `a: 'return`
-2,12:     return a //
+2,12:     return a // ERROR
 2,12:            ^
 ```
 
 ### Lifetimes are about references
 
 A lifetime is about the references stored inside a variable.
-All references outlive variables are store in.
+All references outlive variables they are store in.
 Variables can not store references to themselves,
 because it can not outlive itself.
 

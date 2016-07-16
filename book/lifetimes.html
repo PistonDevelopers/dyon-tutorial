@@ -131,19 +131,19 @@ id(x) = clone(x)
 <p>In Dyon, the static type is not guaranteed at runtime,
 therefore <code>bool</code>, <code>f64</code> and <code>str</code> follows same rules as <code>[]</code> or <code>{}</code>:</p>
 <pre><code class="language-rust">fn foo(a: f64) -&gt; {
-    return a //
+    return a // ERROR
 }
 </code></pre>
 <pre><code>--- ERROR ---
 In `source/test.dyon`:
 
 Requires `a: 'return`
-2,12:     return a //
+2,12:     return a // ERROR
 2,12:            ^
 </code></pre>
 <h3>Lifetimes are about references</h3>
 <p>A lifetime is about the references stored inside a variable.
-All references outlive variables are store in.
+All references outlive variables they are store in.
 Variables can not store references to themselves,
 because it can not outlive itself.</p>
 <p>In order to put a reference inside a variable, the lifetime checker
