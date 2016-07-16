@@ -71,3 +71,50 @@ fn main() {
 ```
 
 Here, the order of the declared variables is known.
+
+### The `return` lifetime
+
+The `return` lifetime is the lifetime of the `return` variable.
+This outlives the default lifetime of arguments (no lifetime).
+
+If you return one of the argument, you must use `'return` or `clone`:
+
+```rust
+// With `'return` lifetime.
+id(x: 'return) = x
+
+// With `clone`.
+id(x) = clone(x)
+```
+
+### The lifetime checker does not understand types
+
+In Dyon, the static type is not guaranteed at runtime,
+therefore `bool`, `f64` and `str` follows same rules as `[]` or `{}`:
+
+```rust
+fn foo(a: f64) -> {
+    return a //
+}
+```
+
+```
+--- ERROR ---
+In `source/test.dyon`:
+
+Requires `a: 'return`
+2,12:     return a //
+2,12:            ^
+```
+
+### Lifetimes are about references
+
+A lifetime is about the references stored inside a variable.
+All references outlive variables are store in.
+Variables can not store references to themselves,
+because it can not outlive itself.
+
+In order to put a reference inside a variable, the lifetime checker
+must know that the reference outlives the variable.
+
+Because of the lifetime checker, all memory in Dyon is an acyclic graph.

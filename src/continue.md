@@ -19,3 +19,15 @@ To go to the next turn of an outer loop, use a label:
     }
 }
 ```
+
+In a mathematical loop, `continue` skips the current item:
+
+```rust
+fn main() {
+    list := [1, 2, 3, 4]
+    println(sum i {
+        if i == 2 { continue } // skip `3`
+        list[i]
+    }) // prints `7`
+}
+```

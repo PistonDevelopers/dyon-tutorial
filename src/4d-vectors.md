@@ -151,6 +151,15 @@ fn main() {
 }
 ```
 
+### Other functions for 4D vectors:
+
+- `fn x(vec4) -> f64` - get x component
+- `fn y(vec4) -> f64` - get y component
+- `fn z(vec4) -> f64` - get z component
+- `fn w(vec4) -> f64` - get w component
+- `fn s(vec4, f64) -> f64` - get vector component by index
+- `fn dir__angle(f64) -> vec4` - rotation vector around Z axis
+
 ### Precision
 
 Whenever you do calculations with 4D vectors, you get float 32 bit precision.

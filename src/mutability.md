@@ -32,3 +32,25 @@ fn main() {
     println(a) // prints `3`
 }
 ```
+
+This helps programmers understand the code.
+
+Mutability information is part of the function name.
+You can declare multiple functions with different mutability patterns:
+
+```rust
+// `name`
+name(person: {}) = clone(person.name)
+
+// `name(mut,_)`
+fn name(mut person, name) {
+    person.name = clone(name)
+}
+
+fn main() {
+    character := {name: "Homer Simpson"}
+    println(name(character)) // prints `Homer Simpson`
+    name(mut character, "Marge Simpson")
+    println(name(character)) // prints `Marge Simpson`
+}
+```

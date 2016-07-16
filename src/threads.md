@@ -15,3 +15,13 @@ fn main() {
 ```
 
 A thread runs in parallel.
+
+### Current objects are not passed between threads
+
+Dyon does a clone of variables that are passed to a `go` call.
+The new thread starts with an empty stack.
+This means that current objects are not shared between threads.
+
+### Some useful functions
+
+- `fn join__thread(thr[any]) -> res[any]` - waits for the thread to finish, then returns the result

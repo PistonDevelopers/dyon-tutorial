@@ -33,3 +33,13 @@ fn foo() ~ a {
     println(a)
 }
 ```
+
+Current objects are useful to store things like settings or assets.
+
+### Note to programmers accustomed to globals
+
+Current objects replaces cases where you would use globals in another language.
+Dyon does not support globals, because dynamic modules should not initialize memory upon loading.
+A current object is like a global, except you must use it explicitly,
+and it has a scope which can replace other current objects.
+You might find it much easier to read code using current objects.

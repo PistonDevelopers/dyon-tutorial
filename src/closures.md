@@ -20,6 +20,19 @@ a := \(x) = x + 1
 println(\a(0)) // prints `1`
 ```
 
+### Calling closures on objects
+
+When an object stores a closure, you can call it with named arguments:
+
+```rust
+fn main() {
+    gollum := {say__msg: \(msg) = "My precious " + msg}
+    // prints `my precious ring`
+    println(\gollum.say(msg: "ring"))
+}
+```
+
+
 ### Grab
 
 Use `grab` to compute a value and insert it into a closure:

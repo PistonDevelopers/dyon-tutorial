@@ -2,7 +2,7 @@
 
 In Dyon, the range of a mathematical loop can be inferred from the loop body.
 
-You can leave out the start and end if you use an index on a list:
+When iterating over a list, you can leave out start and end:
 
 ```rust
 list := [1, 2, 3]

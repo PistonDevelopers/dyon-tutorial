@@ -30,6 +30,24 @@ let draw_list = rt.stack.pop().expect("There is no value on the stack");
 let arr = rt.resolve(&draw_list);
 ```
 
+`Runtime::pop`, `Runtime::pop_var`, `Runtime::var` and `Runtime::var_vec4`
+resolves the variable for you.
+
+### Mutate argument
+
+To mutate an argument, you need to obtain a mutable reference to the
+resolved variable on the stack:
+
+```rust
+let v = rt.stack.pop().expect(TINVOTS);
+
+if let Variable::Ref(ind) = v {
+    let ok = if let Variable::Array(ref mut arr) = rt.stack[ind] {
+        Arc::make_mut(arr)...;
+    }
+}
+```
+
 ### Return value
 
 After popping argument and computing a value, push the result on the stack.
@@ -37,7 +55,7 @@ Do not push more than one value, since Dyon only supports a single return value.
 
 ### Reading from a Dyon variable
 
-`Runtime::var`
+The `Runtime::var` function converts a value inside a variable:
 
 ```rust
 let radius: f64 = try!(rt.var(&it[2]));
@@ -45,16 +63,16 @@ let radius: f64 = try!(rt.var(&it[2]));
 
 ### 4D vectors
 
-`Runtime::var_vec4`
+The `Runtime::var_vec4` function converts to a `vec4` convertible type:
 
 ```rust
 let color: [f32; 4] = try!(rt.var_vec4(&it[1]));
 ```
 
-### Using the Piston-Current crate
+### Piston-Current
 
 Dyon keeps no track of variables in the Rust environment.
-You can use the [Piston-Current](https://github.com/pistondevelopers/current) crate to read from or change such variables.
+You can use the [Piston-Current](https://github.com/pistondevelopers/current) crate to read from or change such variables by type.
 
 ```rust
 pub fn render(rt: &mut Runtime) -> Result<(), String> {

@@ -23,3 +23,14 @@ Dfn {
 `Lt::Arg(0)` means the argument outlives the first argument.
 
 Lifetimes must not be cyclic.
+For example, this is not valid Dyon code:
+
+```rust
+fn foo(a: 'b, b: 'a) { ... }
+```
+
+`Lt::Return` means the arugment outlives the return value:
+
+```rust
+fn foo(a: 'return) -> { ... }
+```

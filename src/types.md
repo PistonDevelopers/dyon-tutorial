@@ -7,7 +7,8 @@ In Dyon, there are two kinds of types:
 
 ### Runtime types
 
-Runtime types are checked with the `typeof` function:
+Dyon check the runtime type when using `=` to change a variable.
+To get the runtime type, use the `typeof` function:
 
 ```rust
 fn main() {

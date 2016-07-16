@@ -62,3 +62,9 @@ You can use `+=` (back) and `-=` (front) to link together link blocks.
 This is faster, but uses a little more memory.
 
 You can not use `+` because it is too easy to waste memory by error.
+
+### Some useful functions
+
+- `fn is_empty(link) -> bool`
+- `fn head(link) -> opt[any]`
+- `fn tail(link) -> link`

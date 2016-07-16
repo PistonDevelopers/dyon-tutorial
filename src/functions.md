@@ -24,6 +24,15 @@ Another way is to use mathematical notation:
 f(x) = x + 1
 ```
 
+All mathematically declared functions returns a value.
+
+Pro tip: To declare constants, use mathematical notation:
+
+```rust
+// Speed of light.
+c() = 299_792_458
+```
+
 ### Fibonacci example
 
 Source code: examples/fibonacci

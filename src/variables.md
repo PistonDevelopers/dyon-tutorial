@@ -17,6 +17,15 @@ a := 3
 a = "hi!" // ERROR
 ```
 
+```
+--- ERROR ---
+main (source/test.dyon)
+
+Expected assigning to text
+3,5:     a = "hi!" // ERROR
+3,5:     ^
+```
+
 ### Echo example
 
 Source code: examples/echo

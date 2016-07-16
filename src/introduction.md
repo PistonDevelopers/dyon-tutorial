@@ -27,7 +27,7 @@ The language takes ideas from Javascript, Go and Rust, but focuses on practical 
 
 There are plenty of new ideas in Dyon:
 
-- Lifetime checker for arguments
+- Lifetime check for function arguments
 - Use `return` as local variable
 - Mathematical loops
 - Current objects

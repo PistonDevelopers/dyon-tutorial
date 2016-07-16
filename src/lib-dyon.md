@@ -2,7 +2,7 @@
 
 When designing Dyon libraries written in Rust, it is common to include
 a "lib.dyon" file in the "src" folder.
-This file lists all external functions are they would appear in Dyon code.
+This file lists all external functions as they would appear in Dyon code.
 
 Two examples from the Dyon library:
 

@@ -31,6 +31,13 @@ fn main() {
 }
 ```
 
+### Calling functions in dynamic modules
+
+Dyon peforms a runtime lifetime check of arguments for these functions:
+
+- `fn call(module, name, args)` - returns no value
+- `fn call_ret(module, name, args)` - returns value
+
 ### Why dynamic modules?
 
 Module loading is often an important part of a program:

@@ -19,3 +19,15 @@ To exit an outer loop, use a label:
     }
 }
 ```
+
+In a mathematical loop, `break` skips the rest:
+
+```rust
+fn main() {
+    list := [1, 2, 3]
+    println(sum i {
+        if i > 1 { break } // skip `3`
+        list[i]
+    }) // prints `3`
+}
+```

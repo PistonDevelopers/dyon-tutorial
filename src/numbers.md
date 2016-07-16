@@ -27,23 +27,14 @@ g := a % 3
 
 ### Relative change
 
-The following operators change the value:
+The following operators change the value relatively:
 
 ```rust
-a = a + 1
-a += 1
-
-a = a - 1
-a -= 1
-
-a = a * 2
-a *= 2
-
-a = a / 2
-a /= 2
-
-a = a % 2
-a %= 2
+a += 1 // increase by 1
+a -= 1 // declare by 1
+a *= 2 // multiply by 2
+a /= 2 // divide by 2
+a %= 2 // find division reminder of 2
 ```
 
 ### Comments

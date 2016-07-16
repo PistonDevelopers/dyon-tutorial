@@ -35,7 +35,7 @@ if a == 0 {
 }
 ```
 
-An `if` can be put in an expression:
+An `if` can be used as an expression:
 
 ```rust
 a := 3
