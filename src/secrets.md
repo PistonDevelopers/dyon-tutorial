@@ -1,6 +1,7 @@
 # Secrets
 
 In Dyon, a secret is a hidden array of values associated with a `bool` or `f64`.
+The type if `sec[bool]` or `sec[f64]`.
 
 Use `explain_why` to add a secret to a `bool`:
 
