@@ -1,10 +1,11 @@
 # Loops
 
-In Dyon there are 3 kinds of loops:
+In Dyon there are 4 kinds of loops:
 
 - Infinite loop
 - Traditional For loop
 - Mathematical loops
+- Link loop
 
 ### Infinite loop
 
@@ -46,6 +47,8 @@ Dyon is famous for its mathematical loops:
 - `∀`/`all` - check whether a condition is true for all values
 - `∑`/`sum` - add values to get the sum
 - `∏`/`prod` - multiply values to get the product
+- `∑vec4`/`sum_vec4` - add 4D vectors to get the sum
+- `∏vec4`/`prod_vec4` - multiply 4D vectors to get the product
 
 In mathematics, it is very common to loop over an index.
 An index starts at 0, and increases with 1 for each turn.
@@ -64,5 +67,32 @@ You can also specify the start and end value:
 ```rust
 for i [0, 10) {
     println(i)
+}
+```
+
+### Link loop
+
+The link loop is similar to a link block, but for a repeated pattern.
+
+```rust
+list := [1, 2, 3]
+println(link i {(i+1)": "list[i]})
+```
+
+All evaluated expressions are appended to the link.
+Expressions that do not return a value are allowed inside a link loop.
+
+Pro-tip: A link block inside a link loop gives you an all-or-nothing behavior.
+
+```rust
+ffn main() {
+    people := [{name: "Homer"}, {name: "Bart"}, {name: "Marge"}]
+    kids := link i {link {
+        "name: "
+        name := people[i].name
+        if name == "Bart" {continue} else {name}
+        "\n"
+    }}
+    print(kids)
 }
 ```
