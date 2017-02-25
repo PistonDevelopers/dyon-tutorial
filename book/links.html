@@ -113,9 +113,11 @@ This is faster, but uses a little more memory.</p>
 <p>You can not use <code>+</code> because it is too easy to waste memory by error.</p>
 <h3>Some useful functions</h3>
 <ul>
-<li><code>fn is_empty(link) -&gt; bool</code></li>
-<li><code>fn head(link) -&gt; opt[any]</code></li>
-<li><code>fn tail(link) -&gt; link</code></li>
+<li><code>fn is_empty(link) -&gt; bool</code> - return <code>true</code> if link is empty</li>
+<li><code>fn head(link) -&gt; opt[any]</code> - return first item in link</li>
+<li><code>fn tail(link) -&gt; link</code> - return whole link except first item</li>
+<li><code>fn tip(link) -&gt; opt[any]</code> - return last item in link</li>
+<li><code>fn neck(link) -&gt; link</code> - return whole link except last item</li>
 </ul>
 
                 </div>

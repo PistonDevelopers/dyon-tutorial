@@ -1,0 +1,8 @@
+foo(i) = i + 40
+
+fn main() {
+    a := sift i 3 {go foo(i)}
+    for i len(a) {
+        println(unwrap(join(thread: pop(mut a))))
+    }
+}

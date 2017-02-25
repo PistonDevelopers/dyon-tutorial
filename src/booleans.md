@@ -70,6 +70,6 @@ When programming applications, you use `&&`, `||` and `!`.
 
 Logic use `∧`, `∨` and `¬`.
 
-Non-invertible sets use `*`, `+` and `-`.
+Non-invertible sets uses `*`, `+` and `-`.
 
 In the future Dyon might get more features for Boolean algebra.
