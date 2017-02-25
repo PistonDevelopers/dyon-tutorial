@@ -1,11 +1,7 @@
 [package]
-name = "dynmod"
+name = "multi_threads"
 version = "0.1.0"
 authors = ["Sven Nilsen <bvssvni@gmail.com>"]
-
-[[bin]]
-name = "dynmod"
-path = "src/main.rs"
 
 [dependencies]
 dyon = "0.21.0"

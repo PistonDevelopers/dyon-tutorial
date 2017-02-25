@@ -38,3 +38,4 @@ a.z := 3
 ### Some useful functions
 
 - `fn has({}, str) -> bool` - return `true` if object has key
+- `fn keys({}) -> [str]` - return keys of object

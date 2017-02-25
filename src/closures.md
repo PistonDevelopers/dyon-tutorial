@@ -56,3 +56,5 @@ println(\b(0))
 ```
 
 You can use `grab 'N` where `N` is the level you want to compute from.
+
+Pro tip: Pre-compute as much as possible with `grab` to improve performance.

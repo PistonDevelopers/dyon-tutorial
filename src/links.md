@@ -65,6 +65,8 @@ You can not use `+` because it is too easy to waste memory by error.
 
 ### Some useful functions
 
-- `fn is_empty(link) -> bool`
-- `fn head(link) -> opt[any]`
-- `fn tail(link) -> link`
+- `fn is_empty(link) -> bool` - return `true` if link is empty
+- `fn head(link) -> opt[any]` - return first item in link
+- `fn tail(link) -> link` - return whole link except first item
+- `fn tip(link) -> opt[any]` - return last item in link
+- `fn neck(link) -> link` - return whole link except last item

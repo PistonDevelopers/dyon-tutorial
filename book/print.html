@@ -68,7 +68,7 @@
 
                 <div id="content" class="content">
                     <h1>Introduction</h1>
-<p>Welcome to the Dyon 0.8 tutorial!</p>
+<p>Welcome to the Dyon 0.21 tutorial!</p>
 <p>Dyon is a dynamically typed scripting language,
 designed for game engines and interactive applications.
 It was started in 2016 by Sven Nilsen.</p>
@@ -111,7 +111,7 @@ This contains things you might have noticed and things you can try out on your o
 </ol>
 <p>Open up &quot;Cargo.toml&quot; and add the following:</p>
 <pre><code>[dependencies]
-dyon = &quot;0.8.0&quot;
+dyon = &quot;0.21.0&quot;
 </code></pre>
 <p>Open up &quot;src/main.rs&quot; and type:</p>
 <pre><code class="language-rust">extern crate dyon;
@@ -529,7 +529,7 @@ a + b // eager
 </ul>
 <p>When programming applications, you use <code>&amp;&amp;</code>, <code>||</code> and <code>!</code>.</p>
 <p>Logic use <code>∧</code>, <code>∨</code> and <code>¬</code>.</p>
-<p>Non-invertible sets use <code>*</code>, <code>+</code> and <code>-</code>.</p>
+<p>Non-invertible sets uses <code>*</code>, <code>+</code> and <code>-</code>.</p>
 <p>In the future Dyon might get more features for Boolean algebra.</p>
 <h1>4D vectors</h1>
 <p>In Dyon, you can compute with 4D vectors:</p>
@@ -700,6 +700,7 @@ a.z := 3
 <h3>Some useful functions</h3>
 <ul>
 <li><code>fn has({}, str) -&gt; bool</code> - return <code>true</code> if object has key</li>
+<li><code>fn keys({}) -&gt; [str]</code> - return keys of object</li>
 </ul>
 <h1>Links</h1>
 <p>A link in Dyon is a variable that stores <code>bool</code>, <code>f64</code> and <code>str</code> efficiently.
@@ -747,9 +748,11 @@ This is faster, but uses a little more memory.</p>
 <p>You can not use <code>+</code> because it is too easy to waste memory by error.</p>
 <h3>Some useful functions</h3>
 <ul>
-<li><code>fn is_empty(link) -&gt; bool</code></li>
-<li><code>fn head(link) -&gt; opt[any]</code></li>
-<li><code>fn tail(link) -&gt; link</code></li>
+<li><code>fn is_empty(link) -&gt; bool</code> - return <code>true</code> if link is empty</li>
+<li><code>fn head(link) -&gt; opt[any]</code> - return first item in link</li>
+<li><code>fn tail(link) -&gt; link</code> - return whole link except first item</li>
+<li><code>fn tip(link) -&gt; opt[any]</code> - return last item in link</li>
+<li><code>fn neck(link) -&gt; link</code> - return whole link except last item</li>
 </ul>
 <h1>Closures</h1>
 <p>A closure in Dyon is a variable that works similar to a mathematical function.</p>
@@ -787,6 +790,7 @@ println(b)
 println(\b(0))
 </code></pre>
 <p>You can use <code>grab 'N</code> where <code>N</code> is the level you want to compute from.</p>
+<p>Pro tip: Pre-compute as much as possible with <code>grab</code> to improve performance.</p>
 <h1>Options</h1>
 <p>In Dyon, optional values are wrapped in <code>some(x)</code> or <code>none()</code>.
 The type is <code>opt</code>, which defaults to <code>opt[any]</code>.</p>
@@ -850,6 +854,19 @@ fn main() {
 <p>Dyon does a clone of variables that are passed to a <code>go</code> call.
 The new thread starts with an empty stack.
 This means that current objects are not shared between threads.</p>
+<h3>There can only be one reference when joining</h3>
+<p>A thread must only have a single reference to it when joining.
+For example, if you store threads in an an array, you need to use <code>pop</code>.</p>
+<p>Source code: <a href="https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/multi_threads">examples/multi_threads</a></p>
+<pre><code class="language-rust">foo(i) = i + 40
+
+fn main() {
+    a := sift i 3 {go foo(i)}
+    for i len(a) {
+        println(unwrap(join(thread: pop(mut a))))
+    }
+}
+</code></pre>
 <h3>Some useful functions</h3>
 <ul>
 <li><code>fn join__thread(thr[any]) -&gt; res[any]</code> - waits for the thread to finish, then returns the result</li>

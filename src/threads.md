@@ -22,6 +22,24 @@ Dyon does a clone of variables that are passed to a `go` call.
 The new thread starts with an empty stack.
 This means that current objects are not shared between threads.
 
+### There can only be one reference when joining
+
+A thread must only have a single reference to it when joining.
+For example, if you store threads in an an array, you need to use `pop`.
+
+Source code: [examples/multi_threads](https://github.com/PistonDevelopers/dyon-tutorial/tree/master/examples/multi_threads)
+
+```rust
+foo(i) = i + 40
+
+fn main() {
+    a := sift i 3 {go foo(i)}
+    for i len(a) {
+        println(unwrap(join(thread: pop(mut a))))
+    }
+}
+```
+
 ### Some useful functions
 
 - `fn join__thread(thr[any]) -> res[any]` - waits for the thread to finish, then returns the result

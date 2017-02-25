@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to the Dyon 0.8 tutorial!
+Welcome to the Dyon 0.21 tutorial!
 
 Dyon is a dynamically typed scripting language,
 designed for game engines and interactive applications.

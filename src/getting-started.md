@@ -10,7 +10,7 @@ Open up "Cargo.toml" and add the following:
 
 ```
 [dependencies]
-dyon = "0.8.0"
+dyon = "0.21.0"
 ```
 
 Open up "src/main.rs" and type:
