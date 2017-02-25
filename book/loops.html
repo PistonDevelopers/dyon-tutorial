@@ -68,11 +68,12 @@
 
                 <div id="content" class="content">
                     <h1>Loops</h1>
-<p>In Dyon there are 3 kinds of loops:</p>
+<p>In Dyon there are 4 kinds of loops:</p>
 <ul>
 <li>Infinite loop</li>
 <li>Traditional For loop</li>
 <li>Mathematical loops</li>
+<li>Link loop</li>
 </ul>
 <h3>Infinite loop</h3>
 <pre><code class="language-rust">loop {
@@ -105,6 +106,8 @@ It takes 3 expressions:</p>
 <li><code>∀</code>/<code>all</code> - check whether a condition is true for all values</li>
 <li><code>∑</code>/<code>sum</code> - add values to get the sum</li>
 <li><code>∏</code>/<code>prod</code> - multiply values to get the product</li>
+<li><code>∑vec4</code>/<code>sum_vec4</code> - add 4D vectors to get the sum</li>
+<li><code>∏vec4</code>/<code>prod_vec4</code> - multiply 4D vectors to get the product</li>
 </ul>
 <p>In mathematics, it is very common to loop over an index.
 An index starts at 0, and increases with 1 for each turn.
@@ -117,6 +120,25 @@ All mathematical loops uses the same index notation.</p>
 <p>You can also specify the start and end value:</p>
 <pre><code class="language-rust">for i [0, 10) {
     println(i)
+}
+</code></pre>
+<h3>Link loop</h3>
+<p>The link loop is similar to a link block, but for a repeated pattern.</p>
+<pre><code class="language-rust">list := [1, 2, 3]
+println(link i {(i+1)&quot;: &quot;list[i]})
+</code></pre>
+<p>All evaluated expressions are appended to the link.
+Expressions that do not return a value are allowed inside a link loop.</p>
+<p>Pro-tip: A link block inside a link loop gives you an all-or-nothing behavior.</p>
+<pre><code class="language-rust">ffn main() {
+    people := [{name: &quot;Homer&quot;}, {name: &quot;Bart&quot;}, {name: &quot;Marge&quot;}]
+    kids := link i {link {
+        &quot;name: &quot;
+        name := people[i].name
+        if name == &quot;Bart&quot; {continue} else {name}
+        &quot;\n&quot;
+    }}
+    print(kids)
 }
 </code></pre>
 
