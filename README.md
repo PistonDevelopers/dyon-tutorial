@@ -4,6 +4,10 @@ Welcome to the Dyon tutorial!
 
 [View online](http://www.piston.rs/dyon-tutorial/)
 
+### How to contribute
+
+- [How to deploy](https://github.com/PistonDevelopers/dyon-tutorial/issues)
+
 ## License
 
 Licensed under either of
