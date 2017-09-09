@@ -6,6 +6,7 @@ Welcome to the Dyon tutorial!
 
 ### How to contribute
 
+- [Requirements](https://github.com/PistonDevelopers/dyon-tutorial/issues/12)
 - [How to deploy](https://github.com/PistonDevelopers/dyon-tutorial/issues)
 
 ## License
