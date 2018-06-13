@@ -31,6 +31,7 @@
 - [Types](./types.md)
     - [Ad-hoc types](./ad-hoc-types.md)
     - [Complain when wrong](./complain-when-wrong.md)
+    - [In-types](./in-types.md)
 - [Lifetimes](./lifetimes.md)
 - [Error handling](./error-handling.md)
 - [Copy-on-write](./copy-on-write.md)
