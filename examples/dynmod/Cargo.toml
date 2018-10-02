@@ -8,4 +8,4 @@ name = "dynmod"
 path = "src/main.rs"
 
 [dependencies]
-dyon = "0.21.0"
+dyon = "0.36.0"
