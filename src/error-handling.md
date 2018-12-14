@@ -1,6 +1,6 @@
 # Error handling
 
-In Dyon, error handling use the `?` operator to propagate errors.
+In Dyon, error handling uses the `?` operator to propagate errors.
 
 ```rust
 fn try_divide(a: f64, b: f64) -> res[f64] {
