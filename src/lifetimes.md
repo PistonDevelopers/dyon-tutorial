@@ -110,7 +110,7 @@ Requires `a: 'return`
 ### Lifetimes are about references
 
 A lifetime is about the references stored inside a variable.
-All references outlive variables they are store in.
+All references outlive variables they are stored in.
 Variables can not store references to themselves,
 because it can not outlive itself.
 
