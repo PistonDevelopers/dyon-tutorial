@@ -49,4 +49,4 @@ Module loading is often an important part of a program:
 For example, the same Dyon game can run on game engines that supports multiple backend APIs for rendering.
 In other languages you might write generic code to make it reusable across APIs.
 Dyon solves this by making all code reusable across APIs, as long as the
-dependencies implements the same set of functions.
+dependencies implement the same set of functions.

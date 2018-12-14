@@ -68,7 +68,7 @@ The easiest way to do this is to organize application structure in flat arrays.
 - Use current objects to pass arrays around
 - Batch changes to arrays together by iterating over them
 
-Optimize the data structure for the algorithms that processes it.
+Optimize the data structure for the algorithms that process it.
 When the algorithm changes, the data structure changes too!
 
 ### Dyon is a scripting language
