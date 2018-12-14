@@ -42,7 +42,7 @@ pub struct Person {
 dyon_obj!{Person { first_name, last_name, age }}
 ```
 
-All fields must implement `embed::PopVariable` and `embed::PopVariable`.
+All fields must implement `embed::PopVariable` and `embed::PushVariable`.
 
 ### The `Dfn` struct
 
