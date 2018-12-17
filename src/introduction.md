@@ -7,7 +7,8 @@ designed for game engines and interactive applications.
 It was started in 2016 by Sven Nilsen.
 
 This tutorial is written for people with little programming experience.
-The language is made simple on purpose.
+
+The language in this tutorial is made simple on purpose.
 If you are experienced programmer, you might want to skip to the parts that interests you.
 
 ### Dyon is different!

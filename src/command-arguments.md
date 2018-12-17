@@ -1,7 +1,6 @@
 # Command-line arguments
 
-Dyon uses a function to return an array of arguments which the program
-was started with:
+Dyon has a function to return an array of command-line arguments:
 
 ```rust
 fn print_args_list {
@@ -9,4 +8,4 @@ fn print_args_list {
 }
 ```
 
-The first element is usually the path of the executable.
+The first item is the path of the executable.
