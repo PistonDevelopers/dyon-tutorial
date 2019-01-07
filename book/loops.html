@@ -130,7 +130,7 @@ println(link i {(i+1)&quot;: &quot;list[i]})
 <p>All evaluated expressions are appended to the link.
 Expressions that do not return a value are allowed inside a link loop.</p>
 <p>Pro-tip: A link block inside a link loop gives you an all-or-nothing behavior.</p>
-<pre><code class="language-rust">ffn main() {
+<pre><code class="language-rust">fn main() {
     people := [{name: &quot;Homer&quot;}, {name: &quot;Bart&quot;}, {name: &quot;Marge&quot;}]
     kids := link i {link {
         &quot;name: &quot;
