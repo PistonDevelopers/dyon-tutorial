@@ -85,7 +85,7 @@ Expressions that do not return a value are allowed inside a link loop.
 Pro-tip: A link block inside a link loop gives you an all-or-nothing behavior.
 
 ```rust
-ffn main() {
+fn main() {
     people := [{name: "Homer"}, {name: "Bart"}, {name: "Marge"}]
     kids := link i {link {
         "name: "
