@@ -13,6 +13,7 @@
     - [Strings](./strings.md)
     - [Booleans](./booleans.md)
     - [4D vectors](./4d-vectors.md)
+    - [4D matrices](./4d-matrices.md)
     - [Arrays](./arrays.md)
     - [Objects](./objects.md)
     - [Links](./links.md)
