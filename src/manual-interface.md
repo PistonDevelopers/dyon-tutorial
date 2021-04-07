@@ -13,10 +13,12 @@ These functions are useful when pushing and popping variables:
 
 - `Runtime::pop` - convert from stack
 - `Runtime::pop_vec4` - convert 4D vector from stack
+- `Runtime::pop_mat4` - convert 4D matrix from stack
 - `Runtime::var` - convert from variable
 - `Runtime::var_vec4` - convert 4D vector from variable
 - `Runtime::push` - convert to variable on stack
 - `Runtime::push_vec4` - convert to 4D vector on stack
+- `Runtime::push_mat4` - convert to 4D matrix on stack
 - `Runtime::resolve` - resolve a variable reference
 
 ### Getting arguments of function
@@ -30,7 +32,7 @@ let draw_list = rt.stack.pop().expect("There is no value on the stack");
 let arr = rt.resolve(&draw_list);
 ```
 
-`Runtime::pop`, `Runtime::pop_var`, `Runtime::var` and `Runtime::var_vec4`
+`Runtime::pop`, `Runtime::pop_var`, `Runtime::pop_vec4`, `Runtime::pop_mat4`, `Runtime::var`, `Runtime::var_vec4` and `Runtime::var_mat4`
 resolves the variable for you.
 
 ### Mutate argument
@@ -67,6 +69,14 @@ The `Runtime::var_vec4` function converts to a `vec4` convertible type:
 
 ```rust
 let color: [f32; 4] = rt.var_vec4(&it[1])?;
+```
+
+### 4D matrices
+
+The `Runtime::var_mat4` function converts to a `mat4` convertiable type:
+
+```rust
+let mat: [[f32; 4]; 4] = rt.var_mat4(&it[1])?;
 ```
 
 ### Piston-Current

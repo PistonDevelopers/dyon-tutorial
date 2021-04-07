@@ -1752,10 +1752,12 @@ This is the only way to write external functions that mutate arguments.</p>
 <ul>
 <li><code>Runtime::pop</code> - convert from stack</li>
 <li><code>Runtime::pop_vec4</code> - convert 4D vector from stack</li>
+<li><code>Runtime::pop_mat4</code> - convert 4D matrix from stack</li>
 <li><code>Runtime::var</code> - convert from variable</li>
 <li><code>Runtime::var_vec4</code> - convert 4D vector from variable</li>
 <li><code>Runtime::push</code> - convert to variable on stack</li>
 <li><code>Runtime::push_vec4</code> - convert to 4D vector on stack</li>
+<li><code>Runtime::push_mat4</code> - convert to 4D matrix on stack</li>
 <li><code>Runtime::resolve</code> - resolve a variable reference</li>
 </ul>
 <h3>Getting arguments of function</h3>
@@ -1765,7 +1767,7 @@ it is a reference to a variable:</p>
 <pre><code class="language-rust">let draw_list = rt.stack.pop().expect(&quot;There is no value on the stack&quot;);
 let arr = rt.resolve(&amp;draw_list);
 </code></pre>
-<p><code>Runtime::pop</code>, <code>Runtime::pop_var</code>, <code>Runtime::var</code> and <code>Runtime::var_vec4</code>
+<p><code>Runtime::pop</code>, <code>Runtime::pop_var</code>, <code>Runtime::pop_vec4</code>, <code>Runtime::pop_mat4</code>, <code>Runtime::var</code>, <code>Runtime::var_vec4</code> and <code>Runtime::var_mat4</code>
 resolves the variable for you.</p>
 <h3>Mutate argument</h3>
 <p>To mutate an argument, you need to obtain a mutable reference to the
@@ -1788,6 +1790,10 @@ Do not push more than one value, since Dyon only supports a single return value.
 <h3>4D vectors</h3>
 <p>The <code>Runtime::var_vec4</code> function converts to a <code>vec4</code> convertible type:</p>
 <pre><code class="language-rust">let color: [f32; 4] = rt.var_vec4(&amp;it[1])?;
+</code></pre>
+<h3>4D matrices</h3>
+<p>The <code>Runtime::var_mat4</code> function converts to a <code>mat4</code> convertiable type:</p>
+<pre><code class="language-rust">let mat: [[f32; 4]; 4] = rt.var_mat4(&amp;it[1])?;
 </code></pre>
 <h3>Piston-Current</h3>
 <p>Dyon keeps no track of variables in the Rust environment.
