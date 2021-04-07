@@ -58,7 +58,7 @@ Do not push more than one value, since Dyon only supports a single return value.
 The `Runtime::var` function converts a value inside a variable:
 
 ```rust
-let radius: f64 = try!(rt.var(&it[2]));
+let radius: f64 = rt.var(&it[2])?;
 ```
 
 ### 4D vectors
@@ -66,7 +66,7 @@ let radius: f64 = try!(rt.var(&it[2]));
 The `Runtime::var_vec4` function converts to a `vec4` convertible type:
 
 ```rust
-let color: [f32; 4] = try!(rt.var_vec4(&it[1]));
+let color: [f32; 4] = rt.var_vec4(&it[1])?;
 ```
 
 ### Piston-Current

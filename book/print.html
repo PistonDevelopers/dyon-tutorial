@@ -1054,7 +1054,7 @@ println(link i {(i+1)&quot;: &quot;list[i]})
 <p>All evaluated expressions are appended to the link.
 Expressions that do not return a value are allowed inside a link loop.</p>
 <p>Pro-tip: A link block inside a link loop gives you an all-or-nothing behavior.</p>
-<pre><code class="language-rust">ffn main() {
+<pre><code class="language-rust">fn main() {
     people := [{name: &quot;Homer&quot;}, {name: &quot;Bart&quot;}, {name: &quot;Marge&quot;}]
     kids := link i {link {
         &quot;name: &quot;
@@ -1783,11 +1783,11 @@ if let Variable::Ref(ind) = v {
 Do not push more than one value, since Dyon only supports a single return value.</p>
 <h3>Reading from a Dyon variable</h3>
 <p>The <code>Runtime::var</code> function converts a value inside a variable:</p>
-<pre><code class="language-rust">let radius: f64 = try!(rt.var(&amp;it[2]));
+<pre><code class="language-rust">let radius: f64 = rt.var(&amp;it[2])?;
 </code></pre>
 <h3>4D vectors</h3>
 <p>The <code>Runtime::var_vec4</code> function converts to a <code>vec4</code> convertible type:</p>
-<pre><code class="language-rust">let color: [f32; 4] = try!(rt.var_vec4(&amp;it[1]));
+<pre><code class="language-rust">let color: [f32; 4] = rt.var_vec4(&amp;it[1])?;
 </code></pre>
 <h3>Piston-Current</h3>
 <p>Dyon keeps no track of variables in the Rust environment.
