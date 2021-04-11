@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>The Dyon Programming Language</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+
+        <!-- MathJax -->
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = localStorage.getItem('theme');
+            if (theme == null) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = localStorage.getItem('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html"><strong>3.</strong> Comments</a></li><li><a href="./functions.html"><strong>4.</strong> Functions</a></li><li><ul class="section"><li><a href="./mutability.html"><strong>4.1.</strong> Mutability</a></li><li><a href="./named-arguments.html"><strong>4.2.</strong> Named arguments</a></li><li><a href="./return.html"><strong>4.3.</strong> Return</a></li></ul></li><li><a href="./blocks.html"><strong>5.</strong> Blocks</a></li><li><a href="./variables.html"><strong>6.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>6.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>6.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>6.3.</strong> Booleans</a></li><li><a href="./4d-vectors.html"><strong>6.4.</strong> 4D vectors</a></li><li><a href="./4d-matrices.html" class="active"><strong>6.5.</strong> 4D matrices</a></li><li><a href="./arrays.html"><strong>6.6.</strong> Arrays</a></li><li><a href="./objects.html"><strong>6.7.</strong> Objects</a></li><li><a href="./links.html"><strong>6.8.</strong> Links</a></li><li><a href="./closures.html"><strong>6.9.</strong> Closures</a></li><li><a href="./options.html"><strong>6.10.</strong> Options</a></li><li><a href="./results.html"><strong>6.11.</strong> Results</a></li><li><a href="./threads.html"><strong>6.12.</strong> Threads</a></li><li><a href="./secrets.html"><strong>6.13.</strong> Secrets</a></li></ul></li><li><a href="./if.html"><strong>7.</strong> If</a></li><li><a href="./loops.html"><strong>8.</strong> Loops</a></li><li><ul class="section"><li><a href="./break.html"><strong>8.1.</strong> Break</a></li><li><a href="./continue.html"><strong>8.2.</strong> Continue</a></li><li><a href="./infer-range.html"><strong>8.3.</strong> Infer range</a></li><li><a href="./packed-loops.html"><strong>8.4.</strong> Packed loops</a></li></ul></li><li><a href="./current-objects.html"><strong>9.</strong> Current objects</a></li><li><a href="./types.html"><strong>10.</strong> Types</a></li><li><ul class="section"><li><a href="./ad-hoc-types.html"><strong>10.1.</strong> Ad-hoc types</a></li><li><a href="./complain-when-wrong.html"><strong>10.2.</strong> Complain when wrong</a></li><li><a href="./in-types.html"><strong>10.3.</strong> In-types</a></li></ul></li><li><a href="./lifetimes.html"><strong>11.</strong> Lifetimes</a></li><li><a href="./error-handling.html"><strong>12.</strong> Error handling</a></li><li><a href="./copy-on-write.html"><strong>13.</strong> Copy-on-write</a></li><li><a href="./dynamic-modules.html"><strong>14.</strong> Dynamic modules</a></li><li><a href="./look-up-functions.html"><strong>15.</strong> Look up functions</a></li><li><a href="./optimize-performance.html"><strong>16.</strong> Optimize performance</a></li><li><a href="./interop-with-rust.html"><strong>17.</strong> Interop with Rust</a></li><li><ul class="section"><li><a href="./lib-dyon.html"><strong>17.1.</strong> lib.dyon</a></li><li><a href="./mutability-interop.html"><strong>17.2.</strong> Mutability interop</a></li><li><a href="./lifetime-interop.html"><strong>17.3.</strong> Lifetime interop</a></li><li><a href="./manual-interface.html"><strong>17.4.</strong> Manual interface</a></li></ul></li><li><a href="./standard-library.html"><strong>18.</strong> Standard Library</a></li><li><ul class="section"><li><a href="./command-arguments.html"><strong>18.1.</strong> Command-Line Arguments</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title">The Dyon Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <h1>4D vectors</h1>
+<p>In Dyon, you can compute with 4D matrices:</p>
+<pre><code>mat4 {
+  m00, m01, m02, m03;
+  m10, m11, m12, m13;
+  m20, m21, m22, m23;
+  m30, m31, m32, m33;
+}
+</code></pre>
+<p>Many operations are built-in for working with 4D matrices:</p>
+<pre><code>fn main() {
+    a := mat4 {1,;}
+    b := mat4 {1,;}
+    // prints `mat4 {2,0,0,0; 0,2,0,0; 0,0,2,0; 0,0,0,2}`
+    println(a + b)
+}
+</code></pre>
+<p>4D vectors used as rows:</p>
+<pre><code>mat4 {(1, 0, 0, 0); (0, 1, 0, 0); (0, 0, 1, 0); (0, 0, 0, 1)}
+</code></pre>
+<p>Omitted parentheses:</p>
+<pre><code>mat4 {1,0,0,0; 0,1,0,0; 0,0,1,0; 0,0,0,1}
+</code></pre>
+<p>Omitted trailing zeroes:</p>
+<pre><code>mat4 {1,; 0,1; 0,0,1; 0,0,0,1}
+</code></pre>
+<p>Fills out rows corresponding to identity matrix:</p>
+<pre><code>mat4 {1,; 0,1; 0,0,1}
+</code></pre>
+<p>Identity matrix:</p>
+<pre><code>mat4 {1,;}
+</code></pre>
+<h3>Addition and multiplication</h3>
+<p>Addition is per component for two matrices.</p>
+<p>Multiplication is matrix multiplication.</p>
+<pre><code>fn main() {
+    a := mat4 {1,;}
+    b := a + a
+    // Prints `mat4 {2,0,0,0; 0,2,0,0; 0,0,2,0; 0,0,0,2}`.
+    println(b)
+
+    // Prints `mat4 {4,0,0,0; 0,4,0,0; 0,0,4,0; 0,0,0,4}`.
+    c := b * b
+    println(c)
+}
+</code></pre>
+<p><code>+=</code>, <code>-=</code> and <code>*=</code>:</p>
+<pre><code>fn main() {
+    a := mat4 {1,;}
+    a += a
+    // Prints `mat4 {2,0,0,0; 0,2,0,0; 0,0,2,0; 0,0,0,2}`.
+    println(a)
+
+    // Prints `mat4 {4,0,0,0; 0,4,0,0; 0,0,4,0; 0,0,0,4}`.
+    a *= a
+    println(a)
+
+    // Prints `mat4 {3,0,0,0; 0,3,0,0; 0,0,3,0; 0,0,0,3}`
+    a -= mat4 {1,;}
+    println(a)
+}
+</code></pre>
+<p><code>+</code>, <code>-</code> and <code>*</code> with scalars and matrices is per component:</p>
+<pre><code>fn main() {
+    a := mat4 {1,2,3,4;2,3,4,1;3,4,1,2;4,1,2,3}
+    println(2 * a)
+    println(a * 2)
+    println(2 + a)
+    println(a + 2)
+    println(2 - a)
+    println(a - 2)
+}
+</code></pre>
+<p>Transform 4D vector by multiplying a 4D matrix with a <code>vec4</code> that has a zero in the 4th component:</p>
+<pre><code>fn main() {
+    // Scale x-axis up 2 times.
+    a := mat4 {2,;}
+    println(a * (1, 1, 1))
+
+    // Scale y-axis up 2 times.
+    a := mat4 {1,; 0,2}
+    println(a * (1, 1, 1))
+
+    // Scale z-axis up 2 times.
+    a := mat4 {1,; 0,1; 0,0,2}
+    println(a * (1, 1, 1))
+    // The same using `scale`.
+    println(scale((1, 1, 2)) * (1, 1, 1))
+}
+</code></pre>
+<p>Transform a point by multiplying a 4D matrix with a <code>vec4</code> that has a one in the 4th component:</p>
+<pre><code>fn main() {
+    pos := (1, 2, 3)
+    // Put `1` in the 4th component to transform a point.
+    println(mov((1, 2)) * (xyz pos, 1))
+}
+</code></pre>
+<p>Get row vectors with <code>rx</code>, <code>ry</code>, <code>rz</code>, <code>rw</code>, <code>rv</code> and get column vectors with <code>cx</code>, <code>cy</code>, <code>cz</code>, <code>cw</code>, <code>cv</code>:</p>
+<pre><code>fn main() {
+    a := mat4 {
+        1,2,3,4;
+        5,6,7,8;
+        9,10,11,12;
+        13,14,15,16;
+    }
+
+    // Print row vectors.
+    println(rx(a)) // Prints `(1, 2, 3, 4)`.
+    println(ry(a)) // Prints `(5, 6, 7, 8)`.
+    println(rz(a)) // Prints `(9, 10, 11, 12)`.
+    println(rw(a)) // Prints `(13, 14, 15, 16)`.
+
+    // Print row vectors using a loop.
+    for i 4 {println(rv(a, i))}
+
+    // Print column vectors.
+    println(cx(a)) // Prints `(1, 5, 9, 13)`
+    println(cy(a)) // Prints `(2, 6, 10, 14)`
+    println(cz(a)) // Prints `(3, 7, 11, 15)`
+    println(cw(a)) // Prints `(4, 8, 12, 16)`
+
+    // Print column vectors using a loop.
+    for i 4 {println(cv(a, i))}
+}
+</code></pre>
+<h3>Negation</h3>
+<p>Negation is per component:</p>
+<pre><code>a := mat4 {1,;}
+// Prints `mat4 {-1,0,0,0; 0,-1,0,0; 0,0,-1,0; 0,0,0,-1}`
+println(-a)
+</code></pre>
+<h3>Other functions for 4D vectors:</h3>
+<ul>
+<li><code>fn det(m: mat4) -&gt; f64</code> determinant</li>
+<li><code>fn inv(m: mat4) -&gt; mat4</code> inverse</li>
+<li><code>fn mov(v: vec4) -&gt; mat4</code> translation</li>
+<li><code>fn scale(v: vec4) -&gt; mat4</code> scale</li>
+<li><code>fn rot__axis_angle(axis: vec4, angle: f64) -&gt; mat4</code> axis-angle rotation</li>
+<li><code>n ortho__pos_right_up_forward(pos: vec4, right: vec4, up: vec4, forward: vec4) -&gt; mat4</code> orthogonal view</li>
+<li><code>fn proj__fov_near_far_ar(fov: f64, near: f64, far: f64, ar: f64) -&gt; mat4</code> projection view</li>
+<li><code>fn mvp__model_view_projection(model: mat4, view: mat4, projection: mat4) -&gt; mat4</code> model-view-projection</li>
+</ul>
+<h3>Precision</h3>
+<p>Whenever you do calculations with 4D matrices, you get float 32 bit precision.</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a href="./4d-vectors.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="./arrays.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="./4d-vectors.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="./arrays.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>
