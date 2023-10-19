@@ -1,73 +1,177 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The Dyon Programming Language</title>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Loops - The Dyon Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-        <base href="">
-
-        <link rel="stylesheet" href="book.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
+        <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
 
+        <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
 
-        <!-- MathJax -->
-        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <!-- Custom theme stylesheets -->
 
-        <!-- Fetch JQuery from CDN but have a local fallback -->
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script>
-            if (typeof jQuery == 'undefined') {
-                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
-            }
-        </script>
     </head>
-    <body>
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
-            var theme = localStorage.getItem('theme');
-            if (theme == null) { theme = 'light'; }
-            $('body').removeClass().addClass(theme);
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var sidebar = localStorage.getItem('sidebar');
-            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
-            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
-        <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li><a href="./introduction.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting-started.html"><strong>2.</strong> Getting started</a></li><li><a href="./comments.html"><strong>3.</strong> Comments</a></li><li><a href="./functions.html"><strong>4.</strong> Functions</a></li><li><ul class="section"><li><a href="./mutability.html"><strong>4.1.</strong> Mutability</a></li><li><a href="./named-arguments.html"><strong>4.2.</strong> Named arguments</a></li><li><a href="./return.html"><strong>4.3.</strong> Return</a></li></ul></li><li><a href="./blocks.html"><strong>5.</strong> Blocks</a></li><li><a href="./variables.html"><strong>6.</strong> Variables</a></li><li><ul class="section"><li><a href="./numbers.html"><strong>6.1.</strong> Numbers</a></li><li><a href="./strings.html"><strong>6.2.</strong> Strings</a></li><li><a href="./booleans.html"><strong>6.3.</strong> Booleans</a></li><li><a href="./4d-vectors.html"><strong>6.4.</strong> 4D vectors</a></li><li><a href="./4d-matrices.html"><strong>6.5.</strong> 4D matrices</a></li><li><a href="./arrays.html"><strong>6.6.</strong> Arrays</a></li><li><a href="./objects.html"><strong>6.7.</strong> Objects</a></li><li><a href="./links.html"><strong>6.8.</strong> Links</a></li><li><a href="./closures.html"><strong>6.9.</strong> Closures</a></li><li><a href="./options.html"><strong>6.10.</strong> Options</a></li><li><a href="./results.html"><strong>6.11.</strong> Results</a></li><li><a href="./threads.html"><strong>6.12.</strong> Threads</a></li><li><a href="./secrets.html"><strong>6.13.</strong> Secrets</a></li></ul></li><li><a href="./if.html"><strong>7.</strong> If</a></li><li><a href="./loops.html" class="active"><strong>8.</strong> Loops</a></li><li><ul class="section"><li><a href="./break.html"><strong>8.1.</strong> Break</a></li><li><a href="./continue.html"><strong>8.2.</strong> Continue</a></li><li><a href="./infer-range.html"><strong>8.3.</strong> Infer range</a></li><li><a href="./packed-loops.html"><strong>8.4.</strong> Packed loops</a></li></ul></li><li><a href="./current-objects.html"><strong>9.</strong> Current objects</a></li><li><a href="./types.html"><strong>10.</strong> Types</a></li><li><ul class="section"><li><a href="./ad-hoc-types.html"><strong>10.1.</strong> Ad-hoc types</a></li><li><a href="./complain-when-wrong.html"><strong>10.2.</strong> Complain when wrong</a></li><li><a href="./in-types.html"><strong>10.3.</strong> In-types</a></li></ul></li><li><a href="./lifetimes.html"><strong>11.</strong> Lifetimes</a></li><li><a href="./error-handling.html"><strong>12.</strong> Error handling</a></li><li><a href="./copy-on-write.html"><strong>13.</strong> Copy-on-write</a></li><li><a href="./dynamic-modules.html"><strong>14.</strong> Dynamic modules</a></li><li><a href="./look-up-functions.html"><strong>15.</strong> Look up functions</a></li><li><a href="./optimize-performance.html"><strong>16.</strong> Optimize performance</a></li><li><a href="./interop-with-rust.html"><strong>17.</strong> Interop with Rust</a></li><li><ul class="section"><li><a href="./lib-dyon.html"><strong>17.1.</strong> lib.dyon</a></li><li><a href="./mutability-interop.html"><strong>17.2.</strong> Mutability interop</a></li><li><a href="./lifetime-interop.html"><strong>17.3.</strong> Lifetime interop</a></li><li><a href="./manual-interface.html"><strong>17.4.</strong> Manual interface</a></li></ul></li><li><a href="./standard-library.html"><strong>18.</strong> Standard Library</a></li><li><ul class="section"><li><a href="./command-arguments.html"><strong>18.1.</strong> Command-Line Arguments</a></li></ul>
-        </div>
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="comments.html"><strong aria-hidden="true">3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">4.</strong> Functions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mutability.html"><strong aria-hidden="true">4.1.</strong> Mutability</a></li><li class="chapter-item expanded "><a href="named-arguments.html"><strong aria-hidden="true">4.2.</strong> Named arguments</a></li><li class="chapter-item expanded "><a href="return.html"><strong aria-hidden="true">4.3.</strong> Return</a></li></ol></li><li class="chapter-item expanded "><a href="blocks.html"><strong aria-hidden="true">5.</strong> Blocks</a></li><li class="chapter-item expanded "><a href="variables.html"><strong aria-hidden="true">6.</strong> Variables</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="numbers.html"><strong aria-hidden="true">6.1.</strong> Numbers</a></li><li class="chapter-item expanded "><a href="strings.html"><strong aria-hidden="true">6.2.</strong> Strings</a></li><li class="chapter-item expanded "><a href="booleans.html"><strong aria-hidden="true">6.3.</strong> Booleans</a></li><li class="chapter-item expanded "><a href="4d-vectors.html"><strong aria-hidden="true">6.4.</strong> 4D vectors</a></li><li class="chapter-item expanded "><a href="4d-matrices.html"><strong aria-hidden="true">6.5.</strong> 4D matrices</a></li><li class="chapter-item expanded "><a href="arrays.html"><strong aria-hidden="true">6.6.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="objects.html"><strong aria-hidden="true">6.7.</strong> Objects</a></li><li class="chapter-item expanded "><a href="links.html"><strong aria-hidden="true">6.8.</strong> Links</a></li><li class="chapter-item expanded "><a href="closures.html"><strong aria-hidden="true">6.9.</strong> Closures</a></li><li class="chapter-item expanded "><a href="options.html"><strong aria-hidden="true">6.10.</strong> Options</a></li><li class="chapter-item expanded "><a href="results.html"><strong aria-hidden="true">6.11.</strong> Results</a></li><li class="chapter-item expanded "><a href="threads.html"><strong aria-hidden="true">6.12.</strong> Threads</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">6.13.</strong> Secrets</a></li></ol></li><li class="chapter-item expanded "><a href="if.html"><strong aria-hidden="true">7.</strong> If</a></li><li class="chapter-item expanded "><a href="loops.html" class="active"><strong aria-hidden="true">8.</strong> Loops</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="break.html"><strong aria-hidden="true">8.1.</strong> Break</a></li><li class="chapter-item expanded "><a href="continue.html"><strong aria-hidden="true">8.2.</strong> Continue</a></li><li class="chapter-item expanded "><a href="infer-range.html"><strong aria-hidden="true">8.3.</strong> Infer range</a></li><li class="chapter-item expanded "><a href="packed-loops.html"><strong aria-hidden="true">8.4.</strong> Packed loops</a></li></ol></li><li class="chapter-item expanded "><a href="current-objects.html"><strong aria-hidden="true">9.</strong> Current objects</a></li><li class="chapter-item expanded "><a href="types.html"><strong aria-hidden="true">10.</strong> Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ad-hoc-types.html"><strong aria-hidden="true">10.1.</strong> Ad-hoc types</a></li><li class="chapter-item expanded "><a href="complain-when-wrong.html"><strong aria-hidden="true">10.2.</strong> Complain when wrong</a></li><li class="chapter-item expanded "><a href="in-types.html"><strong aria-hidden="true">10.3.</strong> In-types</a></li></ol></li><li class="chapter-item expanded "><a href="lifetimes.html"><strong aria-hidden="true">11.</strong> Lifetimes</a></li><li class="chapter-item expanded "><a href="error-handling.html"><strong aria-hidden="true">12.</strong> Error handling</a></li><li class="chapter-item expanded "><a href="copy-on-write.html"><strong aria-hidden="true">13.</strong> Copy-on-write</a></li><li class="chapter-item expanded "><a href="dynamic-modules.html"><strong aria-hidden="true">14.</strong> Dynamic modules</a></li><li class="chapter-item expanded "><a href="look-up-functions.html"><strong aria-hidden="true">15.</strong> Look up functions</a></li><li class="chapter-item expanded "><a href="optimize-performance.html"><strong aria-hidden="true">16.</strong> Optimize performance</a></li><li class="chapter-item expanded "><a href="interop-with-rust.html"><strong aria-hidden="true">17.</strong> Interop with Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lib-dyon.html"><strong aria-hidden="true">17.1.</strong> lib.dyon</a></li><li class="chapter-item expanded "><a href="mutability-interop.html"><strong aria-hidden="true">17.2.</strong> Mutability interop</a></li><li class="chapter-item expanded "><a href="lifetime-interop.html"><strong aria-hidden="true">17.3.</strong> Lifetime interop</a></li><li class="chapter-item expanded "><a href="manual-interface.html"><strong aria-hidden="true">17.4.</strong> Manual interface</a></li></ol></li><li class="chapter-item expanded "><a href="standard-library.html"><strong aria-hidden="true">18.</strong> Standard Library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="command-arguments.html"><strong aria-hidden="true">18.1.</strong> Command-Line Arguments</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar" class="menu-bar">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <i id="sidebar-toggle" class="fa fa-bars"></i>
-                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </div>
 
                     <h1 class="menu-title">The Dyon Programming Language</h1>
 
                     <div class="right-buttons">
-                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
                     </div>
                 </div>
 
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
                 <div id="content" class="content">
-                    <h1>Loops</h1>
+                    <main>
+                        <h1 id="loops"><a class="header" href="#loops">Loops</a></h1>
 <p>In Dyon there are 4 kinds of loops:</p>
 <ul>
 <li>Infinite loop</li>
@@ -75,19 +179,23 @@
 <li>Mathematical loops</li>
 <li>Link loop</li>
 </ul>
-<h3>Infinite loop</h3>
-<pre><code class="language-rust">loop {
+<h3 id="infinite-loop"><a class="header" href="#infinite-loop">Infinite loop</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>loop {
     println(&quot;hi!&quot;)
     sleep(1)
 }
-</code></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>An infinite loop runs runs forever, or until <code>break</code> is used inside it.</p>
 <p>Tip: Use Ctrl+C to terminate an infinite loop in the Terminal window.</p>
-<h3>Traditional For loop</h3>
-<pre><code class="language-rust">for i := 0; i &lt; 10; i += 1 {
+<h3 id="traditional-for-loop"><a class="header" href="#traditional-for-loop">Traditional For loop</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for i := 0; i &lt; 10; i += 1 {
     println(i)
 }
-</code></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>A traditional loop is similar to the loop in the programming language C.
 It takes 3 expressions:</p>
 <ul>
@@ -95,7 +203,7 @@ It takes 3 expressions:</p>
 <li>Condition, checked for each turn, e.g. <code>i &lt; 10</code></li>
 <li>Step, called after each turn, e.g. <code>i += 1</code></li>
 </ul>
-<h3>Mathematical loops</h3>
+<h3 id="mathematical-loops"><a class="header" href="#mathematical-loops">Mathematical loops</a></h3>
 <p>Dyon is famous for its mathematical loops:</p>
 <ul>
 <li><code>for</code> - do something for each turn</li>
@@ -112,25 +220,31 @@ It takes 3 expressions:</p>
 <p>In mathematics, it is very common to loop over an index.
 An index starts at 0, and increases with 1 for each turn.
 All mathematical loops uses the same index notation.</p>
-<pre><code class="language-rust">for i 10 {
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for i 10 {
     println(i)
 }
-</code></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>This is equivalent to <code>for i := 0; i &lt; 10; i += 1</code>.</p>
 <p>You can also specify the start and end value:</p>
-<pre><code class="language-rust">for i [0, 10) {
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>for i [0, 10) {
     println(i)
 }
-</code></pre>
-<h3>Link loop</h3>
+<span class="boring">}</span></code></pre></pre>
+<h3 id="link-loop"><a class="header" href="#link-loop">Link loop</a></h3>
 <p>The link loop is similar to a link block, but for a repeated pattern.</p>
-<pre><code class="language-rust">list := [1, 2, 3]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>list := [1, 2, 3]
 println(link i {(i+1)&quot;: &quot;list[i]})
-</code></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>All evaluated expressions are appended to the link.
 Expressions that do not return a value are allowed inside a link loop.</p>
 <p>Pro-tip: A link block inside a link loop gives you an all-or-nothing behavior.</p>
-<pre><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust">fn main() {
     people := [{name: &quot;Homer&quot;}, {name: &quot;Bart&quot;}, {name: &quot;Marge&quot;}]
     kids := link i {link {
         &quot;name: &quot;
@@ -139,52 +253,56 @@ Expressions that do not return a value are allowed inside a link loop.</p>
         &quot;\n&quot;
     }}
     print(kids)
-}
-</code></pre>
+}</code></pre></pre>
 
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="if.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="break.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
                 </div>
-
-                <!-- Mobile navigation buttons -->
-                
-                    <a href="./if.html" class="mobile-nav-chapters previous">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                
-
-                
-                    <a href="./break.html" class="mobile-nav-chapters next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                
-
             </div>
 
-            
-                <a href="./if.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-            
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="if.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-            
-                <a href="./break.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            
+                    <a rel="next prefetch" href="break.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
 
         </div>
 
 
-        <!-- Local fallback for Font Awesome -->
+
+
         <script>
-            if ($(".fa").css("font-family") !== "FontAwesome") {
-                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
-            }
+            window.playground_copyable = true;
         </script>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        
 
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
         <script src="highlight.js"></script>
         <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
     </body>
 </html>
